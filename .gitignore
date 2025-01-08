@@ -1,0 +1,8 @@
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+# Virtualenv
+venv/
+#vscode
+.vscode/
+# Ignore a specific large file
+*.safetensors
