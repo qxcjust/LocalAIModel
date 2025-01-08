@@ -286,13 +286,13 @@ frVentilation = """
 举例：
 用户指令{instruction}: 
 
-设置副驾座椅通风模式3档
+设置副驾座椅通风模式三档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07
 
-设置副驾座椅通风模式2档
+设置副驾座椅通风模式二档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x06
 
-设置副驾座椅通风模式1档
+设置副驾座椅通风模式一档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05
 
 关闭副驾座椅通风
@@ -306,14 +306,26 @@ flSeatHeat = """
 举例：
 用户指令{instruction}: 
 
-设置主驾座椅加热模式3档
+设置主驾座椅加热模式三档
 返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x04
 
-设置主驾座椅加热模式2档
+设置主驾座椅加热模式二档
 返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x03
 
-设置主驾座椅加热模式1档
+设置主驾座椅加热模式一档
 返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02
+
+关闭主驾座椅加热
+返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01
+"""
+
+
+closeflSeatHeat = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
 
 关闭主驾座椅加热
 返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01
@@ -327,14 +339,25 @@ frSeatHeat = """
 举例：
 用户指令{instruction}: 
 
-设置副驾座椅加热模式3档
+设置副驾座椅加热模式三档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x04
 
-设置副驾座椅加热模式2档
+设置副驾座椅加热模式二档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x03
 
-设置副驾座椅加热模式1档
+设置副驾座椅加热模式一档
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x02
+
+关闭副驾座椅加热
+返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01
+"""
+
+closefrSeatHeat = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
 
 关闭副驾座椅加热
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01
@@ -587,6 +610,8 @@ select_scene_prompt = """
 26. 关闭空调风扇
 27. 主驾座椅自动通风加热
 28. 副驾座椅自动通风加热
+29. 关闭主驾座椅加热模式
+30. 关闭副驾座椅加热模式
 
 举例：
 用户指令{instruction}：

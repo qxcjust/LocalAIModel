@@ -12,6 +12,15 @@ left_seatheat = {
     "0x01": "关闭" 
 }
 
+close_left_seatheat = {
+    "prompts": closeflSeatHeat,
+    "response": [
+        "好的，{}主驾座椅加热模式",
+        "了解，{}主驾座椅加热模式"
+    ],
+    "0x01": "关闭" 
+}
+
 right_seatheat = {
     "prompts": frSeatHeat,
     "response": [
@@ -21,5 +30,14 @@ right_seatheat = {
     "0x04": "三档",
     "0x03": "二档",
     "0x02": "一档",   
+    "0x01": "关闭" 
+}
+
+close_right_seatheat = {
+    "prompts": closefrSeatHeat,
+    "response": [
+        "好的，{}副驾座椅加热模式",
+        "了解，{}副驾座椅加热模式"
+    ],
     "0x01": "关闭" 
 }
