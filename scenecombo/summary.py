@@ -6,6 +6,8 @@ from scenecombo.DimmingGlass import *
 from scenecombo.massage import *
 from scenecombo.ventilation import *
 from scenecombo.SeatHeat import *
+from scenecombo.ACTempControl import *
+from scenecombo.music import *
 
 scenario_config = {
     '开左前车窗': lfwindow,
@@ -53,6 +55,10 @@ scenario_config_all = {
     '主驾座椅通风模式': left_ventilation,
     '副驾座椅通风模式': right_ventilation,     
     '主驾座椅加热模式': left_seatheat,
-    '副驾座椅加热模式': right_seatheat       
+    '副驾座椅加热模式': right_seatheat,  
+    '主驾空调温度': left_actempcontrol, 
+    '副驾空调温度': right_actempcontrol,
+    '播放音乐': play_music,
+    '停止播放音乐': stop_music
 }
 

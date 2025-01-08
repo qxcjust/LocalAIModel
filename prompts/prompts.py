@@ -440,6 +440,41 @@ frACTempControl = """
 返回: setACTempControl, AreaID, 0x02, Temp, 32
 """
 
+
+stopmusic = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+停止音乐
+返回: LauncherMusic, MusicType, 0x01, MusicId, 0x00
+"""
+
+playmusic = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+播放舒缓音乐
+返回: LauncherMusic, MusicType, 0x01, MusicId, 0x01
+
+播放歌剧音乐
+返回: LauncherMusic, MusicType, 0x02, MusicId, 0x01
+
+播放钢琴曲
+返回: LauncherMusic, MusicType, 0x03, MusicId, 0x01
+
+播放流行音乐
+返回: LauncherMusic, MusicType, 0x04, MusicId, 0x01
+
+播放小提琴音乐
+返回: LauncherMusic, MusicType, 0x05, MusicId, 0x01
+"""
+
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
 不要任何额外内容
