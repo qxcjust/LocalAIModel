@@ -352,6 +352,93 @@ ambientlight = """
 """
 
 
+flACTempControl = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置设置主驾空调温度21度
+返回: setACTempControl, AreaID, 0x01, Temp, 21
+
+设置设置主驾空调温度22度
+返回: setACTempControl, AreaID, 0x01, Temp, 22
+
+设置设置主驾空调温度23度
+返回: setACTempControl, AreaID, 0x01, Temp, 23
+
+设置设置主驾空调温度24度
+返回: setACTempControl, AreaID, 0x01, Temp, 24
+
+设置设置主驾空调温度25度
+返回: setACTempControl, AreaID, 0x01, Temp, 25
+
+设置设置主驾空调温度26度
+返回: setACTempControl, AreaID, 0x01, Temp, 26
+
+设置设置主驾空调温度27度
+返回: setACTempControl, AreaID, 0x01, Temp, 27
+
+设置设置主驾空调温度28度
+返回: setACTempControl, AreaID, 0x01, Temp, 28
+
+设置设置主驾空调温度29度
+返回: setACTempControl, AreaID, 0x01, Temp, 29
+
+设置设置主驾空调温度30度
+返回: setACTempControl, AreaID, 0x01, Temp, 30
+
+设置设置主驾空调温度31度
+返回: setACTempControl, AreaID, 0x01, Temp, 31
+
+设置设置主驾空调温度32度
+返回: setACTempControl, AreaID, 0x01, Temp, 32
+"""
+
+frACTempControl = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置设置副驾空调温度21度
+返回: setACTempControl, AreaID, 0x02, Temp, 21
+
+设置设置副驾空调温度22度
+返回: setACTempControl, AreaID, 0x02, Temp, 22
+
+设置设置副驾空调温度23度
+返回: setACTempControl, AreaID, 0x02, Temp, 23
+
+设置设置副驾空调温度24度
+返回: setACTempControl, AreaID, 0x02, Temp, 24
+
+设置设置副驾空调温度25度
+返回: setACTempControl, AreaID, 0x02, Temp, 25
+
+设置设置副驾空调温度26度
+返回: setACTempControl, AreaID, 0x02, Temp, 26
+
+设置设置副驾空调温度27度
+返回: setACTempControl, AreaID, 0x02, Temp, 27
+
+设置设置副驾空调温度28度
+返回: setACTempControl, AreaID, 0x02, Temp, 28
+
+设置设置副驾空调温度29度
+返回: setACTempControl, AreaID, 0x02, Temp, 29
+
+设置设置副驾空调温度30度
+返回: setACTempControl, AreaID, 0x02, Temp, 30
+
+设置设置副驾空调温度31度
+返回: setACTempControl, AreaID, 0x02, Temp, 31
+
+设置设置副驾空调温度32度
+返回: setACTempControl, AreaID, 0x02, Temp, 32
+"""
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
@@ -389,6 +476,8 @@ select_scene_prompt = """
 18. 主驾座椅加热模式
 19. 副驾座椅加热模式
 20. 氛围灯
+21. 主驾空调温度
+22. 副驾空调温度
 
 举例：
 用户指令{instruction}：
@@ -413,4 +502,7 @@ select_scene_prompt = """
 
 打开副驾座椅加热模式3档
 返回： 副驾座椅加热
+
+设置主驾空调温度22度
+返回： 主驾空调温度
 """
