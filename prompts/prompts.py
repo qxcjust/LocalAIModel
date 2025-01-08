@@ -440,7 +440,6 @@ frACTempControl = """
 返回: setACTempControl, AreaID, 0x02, Temp, 32
 """
 
-
 stopmusic = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -448,7 +447,7 @@ stopmusic = """
 举例：
 用户指令{instruction}: 
 
-停止音乐
+停止播放音乐
 返回: LauncherMusic, MusicType, 0x01, MusicId, 0x00
 """
 
@@ -473,6 +472,46 @@ playmusic = """
 
 播放小提琴音乐
 返回: LauncherMusic, MusicType, 0x05, MusicId, 0x01
+"""
+
+climate_fanspeed = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置空调风速1档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x01
+
+设置空调风速2档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x02
+
+设置空调风速3档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03
+
+设置空调风速4档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x04
+
+设置空调风速5档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x05
+
+设置空调风速6档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x06
+
+设置空调风速7档
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x07
+"""
+
+close_fanspeed = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+关闭空调风扇
+返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00
 """
 
 fuzzy_instruction_prompt = """
@@ -513,6 +552,10 @@ select_scene_prompt = """
 20. 氛围灯
 21. 主驾空调温度
 22. 副驾空调温度
+23. 播放音乐
+24. 停止播放音乐
+25. 设置空调风速
+26. 关闭空调风扇
 
 举例：
 用户指令{instruction}：
@@ -540,4 +583,13 @@ select_scene_prompt = """
 
 设置主驾空调温度22度
 返回： 主驾空调温度
+
+播放舒缓音乐
+返回： 播放音乐
+
+停止播放音乐
+返回： 停止播放音乐
+
+设置空调风速6档
+返回： 设置空调风速
 """
