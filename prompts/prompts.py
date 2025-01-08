@@ -514,6 +514,35 @@ close_fanspeed = """
 返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00
 """
 
+flSeatautomode = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开主驾座椅自动通风加热
+返回: setSeatAutoMode, SeatID, 0x01, SWStatus, 0x01
+
+关闭主驾座椅自动通风加热
+返回: setSeatAutoMode, SeatID, 0x01, SWStatus, 0x00
+"""
+
+frSeatautomode = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开副驾座椅自动通风加热
+返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x01
+
+关闭副驾座椅自动通风加热
+返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00
+"""
+
+
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
 不要任何额外内容
@@ -556,6 +585,8 @@ select_scene_prompt = """
 24. 停止播放音乐
 25. 设置空调风速
 26. 关闭空调风扇
+27. 主驾座椅自动通风加热
+28. 副驾座椅自动通风加热
 
 举例：
 用户指令{instruction}：
@@ -592,4 +623,7 @@ select_scene_prompt = """
 
 设置空调风速6档
 返回： 设置空调风速
+
+打开主驾座椅自动通风加热
+返回： 主驾座椅自动通风加热
 """

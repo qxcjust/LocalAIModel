@@ -9,6 +9,7 @@ from scenecombo.SeatHeat import *
 from scenecombo.ACTempControl import *
 from scenecombo.music import *
 from scenecombo.climFanSpeed import *
+from scenecombo.seatAutoMode import *
 
 scenario_config = {
     '开左前车窗': lfwindow,
@@ -62,6 +63,8 @@ scenario_config_all = {
     '播放音乐': play_music,
     '停止播放音乐': stop_music,
     '设置空调风速': setclimatefanspeed,
-    '关闭空调风速': closeclimatefanspeed
+    '关闭空调风速': closeclimatefanspeed,
+    '主驾座椅自动通风加热': left_Seatautomode,
+    '副驾座椅自动通风加热': right_Seatautomode    
 }
 
