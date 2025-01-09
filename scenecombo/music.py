@@ -17,8 +17,8 @@ play_music = {
 stop_music = {
     "prompts": stopmusic,
     "response": [
-        "好的，音乐已{}",
-        "了解，音乐已{}"
+        "好的，音乐已停止",
+        "了解，音乐已停止"
     ],
     
     "0x00": "停止播放",
