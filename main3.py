@@ -37,20 +37,17 @@ def Albert_scenario_select(instruction):
 
 def main():
     instruction = "我冷了"
-    print (f"Human: {instruction}")
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
-    # model_path = "/home/ubuntu/iScenario/LLM_Assist/model"
-    # model = BertForSequenceClassification.from_pretrained(model_path)
-    # tokenizer = BertTokenizer.from_pretrained(model_path)
-    # nlp = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
+    #model_path = "/home/ubuntu/iScenario/LLM_Assist/model"
+    #model = BertForSequenceClassification.from_pretrained(model_path)
+    #tokenizer = BertTokenizer.from_pretrained(model_path)
+    #nlp = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
 
-    # label = nlp(instruction)[0]['label']
+    #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
-
     scenario = scenario_config_all[label]
-    print(f"场景决策: {label}")
     logging.info(f"场景决策: {label}")
 
     if label == '模糊场景':
@@ -95,22 +92,17 @@ def main():
         # 场景生成
         json_params_list = string2list(generate_single_scenario(instruction, scenario.get("prompts")))
         name = json_params_list[0]
-
-        # TODO qinxiaocheng
         args = config_args(json_params_list)
         json_params_config = rz_action_template_lf_window(name, args, label)
-        print("生成json \n {}".format(json_params_config))
         logging.info("生成json \n {}".format(json_params_config))
 
-        # TODO qinxiaocheng
         value = ''
         if len(json_params_list) == 3:
             value = json_params_config.get("args")[0]["value"]
         else:
             value = json_params_config.get("args")[1]["value"]
-
+        
         response_sentence = scenario.get("response")[0].format(scenario[value])
-        print(f"Assistant: {response_sentence}")
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
         print(f"Execution time: {end1 - start} seconds")
@@ -119,8 +111,6 @@ def main():
             "json_config": json_params_config,
             "response": response_sentence
         }
-    
-
 
 if __name__ == "__main__":
     main()
