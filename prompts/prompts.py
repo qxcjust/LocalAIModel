@@ -461,6 +461,7 @@ frACTempControl = """
 
 设置设置副驾空调温度32度
 返回: setACTempControl, AreaID, 0x02, Temp, 32
+
 """
 
 stopmusic = """
@@ -471,7 +472,7 @@ stopmusic = """
 用户指令{instruction}: 
 
 停止播放音乐
-返回: LauncherMusic, MusicType, 0x01, MusicId, 0x00
+返回: LauncherMusic, MusicId, 0x00, MusicType, 0x01
 """
 
 playmusic = """
@@ -482,19 +483,19 @@ playmusic = """
 用户指令{instruction}: 
 
 播放舒缓音乐
-返回: LauncherMusic, MusicType, 0x01, MusicId, 0x01
+返回: LauncherMusic, MusicId, 0x01, MusicType, 0x01
 
 播放歌剧音乐
-返回: LauncherMusic, MusicType, 0x02, MusicId, 0x01
+返回: LauncherMusic, MusicId, 0x01, MusicType, 0x02
 
 播放钢琴曲
-返回: LauncherMusic, MusicType, 0x03, MusicId, 0x01
+返回: LauncherMusic, MusicId, 0x01, MusicType, 0x03
 
 播放流行音乐
-返回: LauncherMusic, MusicType, 0x04, MusicId, 0x01
+返回: LauncherMusic, MusicId, 0x01, MusicType, 0x04
 
 播放小提琴音乐
-返回: LauncherMusic, MusicType, 0x05, MusicId, 0x01
+返回: LauncherMusic, MusicId, 0x01, MusicType, 0x05
 """
 
 climate_fanspeed = """
@@ -632,7 +633,7 @@ select_scene_prompt = """
 27. 主驾座椅自动通风加热
 28. 副驾座椅自动通风加热
 29. 关闭主驾座椅加热模式
-30. 关闭副驾座椅加热模式
+20. 关闭副驾座椅加热模式
 31. 模糊场景
 
 举例：

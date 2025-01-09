@@ -41,8 +41,8 @@ scenario_config = {
 }
 
 scenario_config_all = {
-    '左前车窗': lfwindow,
-    '左后车窗': lbwindow,
+    '主驾车窗': lfwindow,
+    '副驾车窗': lbwindow,
     '右前车窗': rfwindow,
     '右后车窗': rbwindow,
     '所有车窗': allwindow,       
