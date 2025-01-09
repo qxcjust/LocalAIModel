@@ -13,38 +13,11 @@ from scenecombo.seatAutoMode import *
 from scenecombo.ambientlight import *
 from scenecombo.FuzzyInstructionScene import *
 
-scenario_config = {
-    '开左前车窗': lfwindow,
-    '关左车门': lfwindow,
-    '关左侧车窗': lfwindow,
-    '关车门': lfdoor,
-    '开车窗': lfwindow,
-    '关左后车窗': lfwindow,
-    '开左后车窗': lfwindow,
-    '关左前车窗': lfwindow,
-    '开车门': lfwindow,
-    '关右车门': lfdoor,
-    '开左侧车窗': lfwindow,
-    '停车点2': lfwindow,
-    '关闭引擎': lfwindow,
-    '关敞篷': lfwindow,
-    '关车窗': lfwindow,
-    '关右前车窗': lfwindow,
-    '停车点1': lfwindow,
-    '喇叭': lfwindow,
-    '开右前车窗': lfwindow,
-    '开右车门': lfdoor,
-    '关右后车窗': lfdoor,
-    "打开引擎": lfwindow,
-    "开右后车窗" : lfdoor,
-    "开后备箱": lfwindow,
-}
-
 scenario_config_all = {
-    '主驾车窗': lfwindow,
-    '副驾车窗': lbwindow,
-    '右前车窗': rfwindow,
-    '右后车窗': rbwindow,
+    '主驾车窗': front_lef_window,
+    '副驾车窗': front_right_window,
+    '左后车窗': rear_left_window,
+    '右后车窗': rear_right_window,
     '所有车窗': allwindow,       
     '主驾座椅': lfchair,
     '副驾座椅': rlchair,

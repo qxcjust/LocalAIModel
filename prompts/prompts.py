@@ -1,4 +1,4 @@
-left_window_scene = """
+front_left_window_scene = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
@@ -18,7 +18,7 @@ left_window_scene = """
 返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
 """
 
-left_back_window_scene = """
+rear_left_window_scene = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
@@ -32,7 +32,7 @@ left_back_window_scene = """
 返回: setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15
 """
 
-right_window_scene = """
+front_right_window_scene = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
@@ -45,14 +45,14 @@ right_window_scene = """
 打开副驾车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
 
-副驾驶车窗
+关闭副驾驶车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15
 
 打开右前车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
 """
 
-right_back_window_scene = """
+rear_right_window_scene = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
@@ -473,6 +473,9 @@ stopmusic = """
 
 停止播放音乐
 返回: LauncherMusic, MusicId, 0x00, MusicType, 0x01
+
+停止音乐
+返回: LauncherMusic, MusicId, 0x00, MusicType, 0x01
 """
 
 playmusic = """
@@ -604,9 +607,9 @@ select_scene_prompt = """
 不要任何额外内容
 
 所有场景：
-1. 左前车窗
-2. 左后车窗
-3. 右前车窗
+1. 主驾车窗
+2. 副驾车窗
+3. 左后车窗
 4. 右后车窗
 5. 所有车窗      
 6. 主驾座椅
@@ -640,10 +643,10 @@ select_scene_prompt = """
 用户指令{instruction}：
 
 打开主驾车窗
-返回： 左前车窗
+返回： 主驾车窗
 
-关闭左驾车窗
-返回： 左前车窗
+关闭副驾车窗
+返回： 副驾车窗
 
 打开主驾驶座椅按摩
 返回： 主驾座椅按摩
