@@ -2,6 +2,7 @@ import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+from VehicleStatus.checkstatus import Status
 
 def string2list(string_list):
     temp = string_list.split(', ')
@@ -54,6 +55,7 @@ def match_fuzzy_instruction(instruction, instructions):
     return returntext
 
 def generate_response_sentence(label, json_params_config, scenario, json_params_list, name):
+    response_sentence = ""
     if label == '车外灯':
         value = ''
         if len(json_params_list) == 3:
@@ -61,7 +63,12 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
         else:
             value = json_params_config.get("args")[1]["value"]
         response_sentence = scenario.get("response")[0].format(scenario[name], scenario[value])
-        return response_sentence
+        return response_sentence, False
+    elif label == '主驾车门' or label == '副驾车门':
+        if Status[label]['state'] == json_params_config['args'][1]['value']:
+            response_sentence = scenario['responseOpen']
+            print (scenario)
+        return response_sentence, True
     else:
         value = ''
         if len(json_params_list) == 3:
@@ -69,10 +76,9 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
         else:
             value = json_params_config.get("args")[1]["value"]
         response_sentence = scenario.get("response")[0].format(scenario[value])
-        return response_sentence
+        return response_sentence, False
     
-import re
- 
+
 def extract_identifier_content(text):
     # 正则表达式匹配两个井号之间的内容
     pattern = re.compile(r"#\s*(.*?)\s*#")

@@ -36,7 +36,7 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
-    instruction = "设置空调风速1档"
+    instruction = "打开主驾车门"
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
@@ -105,12 +105,15 @@ def main():
         logging.info("生成json \n {}".format(json_params_config))
         print("生成json \n {}".format(json_params_config))
 
-        response_sentence = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
+        response_sentence, checkStatus = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
 
+        if checkStatus == True:
+            pass
+        else:
+            action_list.append(json_params_config)
         print(f"Assistant: {response_sentence}")
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
-        action_list.append(json_params_config)
         print(f"Execution time: {end1 - start} seconds")
         return {
             "scenario_decision": label,
