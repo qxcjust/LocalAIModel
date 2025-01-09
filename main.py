@@ -58,6 +58,9 @@ async def process_instruction(input: InstructionInput):
     scenario = scenario_config_all[label]
     logging.info(f"场景决策: {label}")
 
+    # 返回值
+    action_list = []
+
     if label == '模糊场景':
         # 返回值
         action_list = []
@@ -118,10 +121,11 @@ async def process_instruction(input: InstructionInput):
         response_sentence = scenario.get("response")[0].format(scenario[value])
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
+        action_list.append(json_params_config)
         print(f"Execution time: {end1 - start} seconds")
         return {
             "scenario_decision": label,
-            "json_config": json_params_config,
+            "json_config": action_list,
             "response": response_sentence
         }
 

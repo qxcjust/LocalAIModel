@@ -1,7 +1,7 @@
 from prompts.prompts import *
 
 positionlamp = {
-    "prompts": positionlamp_prompt,
+    "prompts": beam_prompt,
     "response": [
         "好的，位置灯已{}",
     ],

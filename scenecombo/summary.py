@@ -67,9 +67,7 @@ scenario_config_all = {
     '空气循环模式': climcirculationmode,
     '打开导航': navigation,
     '雨刷设置': frontwipermode,
-    '远光灯': highbeam,
-    '近光灯': lowbeam,
-    '位置灯': positionlamp,
+    '车外灯': highbeam,
     '空调制热模式': climEVheatermode,
     '自动调温模式': climAutoNormalMode
 }

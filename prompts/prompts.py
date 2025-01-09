@@ -6,16 +6,16 @@ front_left_window_scene = """
 用户指令{instruction}: 
 
 打开左侧车窗
-返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
 
 打开主驾车窗
-返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
 
 关闭主驾驶车窗
-返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15#
 
 打开左前车窗
-返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
 """
 
 rear_left_window_scene = """
@@ -26,10 +26,10 @@ rear_left_window_scene = """
 用户指令{instruction}: 
 
 打开左后车窗
-返回: setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01#
 
 关闭左后车窗
-返回: setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15
+#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15#
 """
 
 front_right_window_scene = """
@@ -40,16 +40,16 @@ front_right_window_scene = """
 用户指令{instruction}: 
 
 打开右侧车窗
-返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
 
 打开副驾车窗
-返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
 
 关闭副驾驶车窗
-返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15#
 
 打开右前车窗
-返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
 """
 
 rear_right_window_scene = """
@@ -60,10 +60,10 @@ rear_right_window_scene = """
 用户指令{instruction}: 
 
 打开右后车窗
-返回: setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01#
 
 关闭右后车窗
-返回: setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x15
+#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x15#
 """
 
 all_window_scene = """
@@ -74,10 +74,10 @@ all_window_scene = """
 用户指令{instruction}: 
 
 打开全部车窗
-返回: setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x01
+#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x01#
 
 关闭全部车窗
-返回: setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15
+#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15#
 """
 
 left_door = """
@@ -88,36 +88,41 @@ left_door = """
 用户指令{instruction}: 
 
 打开主驾车门
-返回: setLockState, DoorID, 0x01, LockState, 0x01
+#setLockState, DoorID, 0x01, LockState, 0x01#
 
 关闭主驾车门
-返回: setLockState, DoorID, 0x01, LockState, 0x02
+#setLockState, DoorID, 0x01, LockState, 0x02#
 
 打开主驾车门
-返回: setLockState, DoorID, 0x01, LockState, 0x01
+#setLockState, DoorID, 0x01, LockState, 0x01#
 
 关闭主驾车门
-返回: setLockState, DoorID, 0x01, LockState, 0x02
+#setLockState, DoorID, 0x01, LockState, 0x02#
 
 打开左车门
-返回: setLockState, DoorID, 0x01, LockState, 0x01
+#setLockState, DoorID, 0x01, LockState, 0x01#
 
 关闭左车门
-返回: setLockState, DoorID, 0x01, LockState, 0x02
+#setLockState, DoorID, 0x01, LockState, 0x02#
 """
 
 right_door = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
+接受返回格式：
+a,b,c,d,e
+拒绝返回格式
+[a,b,c,d,e]
+
 举例：
 用户指令{instruction}: 
 
 打开副驾车门
-返回: setLockState, DoorID, 0x02, LockState, 0x01
+#setLockState, DoorID, 0x02, LockState, 0x01#
 
 关闭副驾车门
-返回: setLockState, DoorID, 0x02, LockState, 0x02
+#setLockState, DoorID, 0x02, LockState, 0x02#
 """
 
 left_front_mirror = """
@@ -128,10 +133,10 @@ left_front_mirror = """
 用户指令{instruction}: 
 
 展开左后视镜
-返回: setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01
+#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01#
 
 折叠左后视镜
-返回: setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x02
+#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x02#
 """
 
 right_front_mirror = """
@@ -142,10 +147,10 @@ right_front_mirror = """
 用户指令{instruction}: 
 
 展开右后视镜
-返回: setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x01
+#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x01#
 
 折叠右后视镜
-返回: setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02
+#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02#
 """
 
 left_front_chair = """
@@ -156,22 +161,22 @@ left_front_chair = """
 用户指令{instruction}: 
 
 主驾座椅往前调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x01
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x01#
 
 主驾座椅往后调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x02
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x02#
 
 主驾座椅往上调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x03
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x03#
 
 主驾座椅往下调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x04
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x04#
 
 主驾座椅靠背往前调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x05
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x05#
 
 主驾座椅靠背往后调节
-返回: setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x06
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x06#
 """
 
 right_front_chair = """
@@ -182,22 +187,22 @@ right_front_chair = """
 用户指令{instruction}: 
 
 副驾座椅往前调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x01
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x01#
 
 副驾座椅往后调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x02
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x02#
 
 副驾座椅往上调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x03
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x03#
 
 副驾座椅往下调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x04
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x04#
 
 副驾座椅靠背往前调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x05
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x05#
 
 副驾座椅靠背往后调节
-返回: setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x06
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x06#
 """
 
 frontdimmingglass = """
@@ -208,10 +213,10 @@ frontdimmingglass = """
 用户指令{instruction}: 
 
 前排调光玻璃调暗
-返回: setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x0b
+#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x0b#
 
 前排调光玻璃调亮
-返回: setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x1b
+#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x1b#
 """
 
 
@@ -223,10 +228,10 @@ reardimmingglass = """
 用户指令{instruction}: 
 
 后排调光玻璃调暗
-返回: setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x0b
+#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x0b#
 
 后排调光玻璃调亮
-返回: setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b
+#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b#
 """
 
 flmassage = """
@@ -237,10 +242,10 @@ flmassage = """
 用户指令{instruction}: 
 
 打开主驾座椅按摩
-返回: setSeatMassageMode, SeatID, 0x01, MassageMode, 0x01
+#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x01#
 
 关闭主驾座椅按摩
-返回: setSeatMassageMode, SeatID, 0x01, MassageMode, 0x00
+#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x00#
 """
 
 
@@ -252,10 +257,10 @@ frmassage = """
 用户指令{instruction}: 
 
 打开副驾座椅按摩
-返回: setSeatMassageMode, SeatID, 0x02, MassageMode, 0x01
+#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x01#
 
 关闭副驾座椅按摩
-返回: setSeatMassageMode, SeatID, 0x02, MassageMode, 0x00
+#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x00#
 """
 
 flVentilation = """
@@ -266,16 +271,16 @@ flVentilation = """
 用户指令{instruction}: 
 
 设置主驾座椅通风模式3档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x07
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x07#
 
 设置主驾座椅通风模式2档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x06
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x06#
 
 设置主驾座椅通风模式1档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x05
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x05#
 
 关闭主驾座椅通风
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
 """
 
 
@@ -287,16 +292,16 @@ frVentilation = """
 用户指令{instruction}: 
 
 设置副驾座椅通风模式三档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
 
 设置副驾座椅通风模式二档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x06
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x06#
 
 设置副驾座椅通风模式一档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05#
 
 关闭副驾座椅通风
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x00
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x00#
 """
 
 flSeatHeat = """
@@ -307,16 +312,16 @@ flSeatHeat = """
 用户指令{instruction}: 
 
 设置主驾座椅加热模式三档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x04
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x04#
 
 设置主驾座椅加热模式二档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x03
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x03#
 
 设置主驾座椅加热模式一档
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
 
 关闭主驾座椅加热
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01#
 """
 
 
@@ -328,7 +333,7 @@ closeflSeatHeat = """
 用户指令{instruction}: 
 
 关闭主驾座椅加热
-返回: setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01#
 """
 
 
@@ -340,16 +345,16 @@ frSeatHeat = """
 用户指令{instruction}: 
 
 设置副驾座椅加热模式三档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x04
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x04#
 
 设置副驾座椅加热模式二档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x03
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x03#
 
 设置副驾座椅加热模式一档
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x02
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x02#
 
 关闭副驾座椅加热
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
 """
 
 closefrSeatHeat = """
@@ -360,7 +365,7 @@ closefrSeatHeat = """
 用户指令{instruction}: 
 
 关闭副驾座椅加热
-返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
 """
 
 flACTempControl = """
@@ -371,40 +376,13 @@ flACTempControl = """
 用户指令{instruction}: 
 
 设置设置主驾空调温度21度
-返回: setACTempControl, AreaID, 0x01, Temp, 21
+#setACTempControl, AreaID, 0x01, Temp, 21#
 
 设置设置主驾空调温度22度
-返回: setACTempControl, AreaID, 0x01, Temp, 22
-
-设置设置主驾空调温度23度
-返回: setACTempControl, AreaID, 0x01, Temp, 23
-
-设置设置主驾空调温度24度
-返回: setACTempControl, AreaID, 0x01, Temp, 24
-
-设置设置主驾空调温度25度
-返回: setACTempControl, AreaID, 0x01, Temp, 25
-
-设置设置主驾空调温度26度
-返回: setACTempControl, AreaID, 0x01, Temp, 26
-
-设置设置主驾空调温度27度
-返回: setACTempControl, AreaID, 0x01, Temp, 27
-
-设置设置主驾空调温度28度
-返回: setACTempControl, AreaID, 0x01, Temp, 28
-
-设置设置主驾空调温度29度
-返回: setACTempControl, AreaID, 0x01, Temp, 29
-
-设置设置主驾空调温度30度
-返回: setACTempControl, AreaID, 0x01, Temp, 30
-
-设置设置主驾空调温度31度
-返回: setACTempControl, AreaID, 0x01, Temp, 31
+#setACTempControl, AreaID, 0x01, Temp, 22#
 
 设置设置主驾空调温度32度
-返回: setACTempControl, AreaID, 0x01, Temp, 32
+#setACTempControl, AreaID, 0x01, Temp, 32#
 """
 
 frACTempControl = """
@@ -415,41 +393,16 @@ frACTempControl = """
 用户指令{instruction}: 
 
 设置设置副驾空调温度21度
-返回: setACTempControl, AreaID, 0x02, Temp, 21
+#setACTempControl, AreaID, 0x02, Temp, 21#
 
 设置设置副驾空调温度22度
-返回: setACTempControl, AreaID, 0x02, Temp, 22
-
-设置设置副驾空调温度23度
-返回: setACTempControl, AreaID, 0x02, Temp, 23
-
-设置设置副驾空调温度24度
-返回: setACTempControl, AreaID, 0x02, Temp, 24
-
-设置设置副驾空调温度25度
-返回: setACTempControl, AreaID, 0x02, Temp, 25
-
-设置设置副驾空调温度26度
-返回: setACTempControl, AreaID, 0x02, Temp, 26
-
-设置设置副驾空调温度27度
-返回: setACTempControl, AreaID, 0x02, Temp, 27
-
-设置设置副驾空调温度28度
-返回: setACTempControl, AreaID, 0x02, Temp, 28
-
-设置设置副驾空调温度29度
-返回: setACTempControl, AreaID, 0x02, Temp, 29
-
-设置设置副驾空调温度30度
-返回: setACTempControl, AreaID, 0x02, Temp, 30
+#setACTempControl, AreaID, 0x02, Temp, 22#
 
 设置设置副驾空调温度31度
-返回: setACTempControl, AreaID, 0x02, Temp, 31
+#setACTempControl, AreaID, 0x02, Temp, 31#
 
 设置设置副驾空调温度32度
-返回: setACTempControl, AreaID, 0x02, Temp, 32
-
+#setACTempControl, AreaID, 0x02, Temp, 32#
 """
 
 stopmusic = """
@@ -460,10 +413,10 @@ stopmusic = """
 用户指令{instruction}: 
 
 停止播放音乐
-返回: LauncherMusic, MusicId, 0x00, MusicType, 0x01
+#LauncherMusic, MusicId, 0x00, MusicType, 0x01#
 
 停止音乐
-返回: LauncherMusic, MusicId, 0x00, MusicType, 0x01
+#LauncherMusic, MusicId, 0x00, MusicType, 0x01#
 """
 
 playmusic = """
@@ -474,19 +427,19 @@ playmusic = """
 用户指令{instruction}: 
 
 播放舒缓音乐
-返回: LauncherMusic, MusicId, 0x01, MusicType, 0x01
+#LauncherMusic, MusicId, 0x01, MusicType, 0x01#
 
 播放歌剧音乐
-返回: LauncherMusic, MusicId, 0x01, MusicType, 0x02
+#LauncherMusic, MusicId, 0x01, MusicType, 0x02#
 
 播放钢琴曲
-返回: LauncherMusic, MusicId, 0x01, MusicType, 0x03
+#LauncherMusic, MusicId, 0x01, MusicType, 0x03#
 
 播放流行音乐
-返回: LauncherMusic, MusicId, 0x01, MusicType, 0x04
+#LauncherMusic, MusicId, 0x01, MusicType, 0x04#
 
 播放小提琴音乐
-返回: LauncherMusic, MusicId, 0x01, MusicType, 0x05
+#LauncherMusic, MusicId, 0x01, MusicType, 0x05#
 """
 
 climate_fanspeed = """
@@ -497,25 +450,25 @@ climate_fanspeed = """
 用户指令{instruction}: 
 
 设置空调风速1档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x01
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x01#
 
 设置空调风速2档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x02
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x02#
 
 设置空调风速3档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
 
 设置空调风速4档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x04
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x04#
 
 设置空调风速5档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x05
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x05#
 
 设置空调风速6档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x06
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x06#
 
 设置空调风速7档
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x07
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x07#
 """
 
 close_fanspeed = """
@@ -526,7 +479,7 @@ close_fanspeed = """
 用户指令{instruction}: 
 
 关闭空调风扇
-返回: setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00#
 """
 
 flSeatautomode = """
@@ -537,10 +490,10 @@ flSeatautomode = """
 用户指令{instruction}: 
 
 打开主驾座椅自动通风加热
-返回: setSeatAutoMode, SeatID, 0x01, SWStatus, 0x01
+#setSeatAutoMode, SeatID, 0x01, SWStatus, 0x01#
 
 关闭主驾座椅自动通风加热
-返回: setSeatAutoMode, SeatID, 0x01, SWStatus, 0x00
+#setSeatAutoMode, SeatID, 0x01, SWStatus, 0x00#
 """
 
 frSeatautomode = """
@@ -551,10 +504,10 @@ frSeatautomode = """
 用户指令{instruction}: 
 
 打开副驾座椅自动通风加热
-返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x01
+#setSeatAutoMode, SeatID, 0x02, SWStatus, 0x01#
 
 关闭副驾座椅自动通风加热
-返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00
+#setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00#
 """
 
 ambientlight_prompts = """
@@ -565,17 +518,17 @@ ambientlight_prompts = """
 用户指令{instruction}: 
 
 关闭氛围灯
-返回: setAmbientLightColor, Color, 0x01
+#setAmbientLightColor, Color, 0x01#
 
-红色: 0x02, 黄色: 0x03, 橙色: 0x04, 蓝色: 0x05  
+0x02, 黄色: 0x03, 橙色: 0x04, 蓝色: 0x05
 设置氛围灯颜色为红色
-返回: setAmbientLightColor, Color, 0x02
+#setAmbientLightColor, Color, 0x02#
 
 设置氛围灯闪烁模式
-返回: setAmbientLightColor, Color, 0x0c
+#setAmbientLightColor, Color, 0x0c#
 
 设置氛围灯呼吸模式
-返回: setAmbientLightColor, Color, 0x0d
+#setAmbientLightColor, Color, 0x0d#
 """
 
 climatcleaness_prompts = """
@@ -586,24 +539,29 @@ climatcleaness_prompts = """
 用户指令{instruction}: 
 
 打开PM2.5空气净化器 | 打开空气净化器
-返回: setClimatCleaness, CleanMode, 0x02
+#setClimatCleaness, CleanMode, 0x02#
 
 关闭PM2.5空气净化器 | 关闭空气净化器
-返回: setClimatCleaness, CleanMode, 0x01
+#setClimatCleaness, CleanMode, 0x01#
 """ 
 
 climatsyncmode_prompts = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
+接受返回格式：
+a,b,c
+拒绝返回格式
+[a,b,c]
+
 举例：
 用户指令{instruction}: 
 
 启动同步模式
-返回: setClimatSyncMode, SWStatus, 0x01
+#setClimatSyncMode, SWStatus, 0x01#
 
 关闭同步模式
-返回: setClimatSyncMode, SWStatus, 0x00
+#setClimatSyncMode, SWStatus, 0x00#
 """ 
 
 
@@ -615,10 +573,10 @@ acmodectrl_prompts = """
 用户指令{instruction}: 
 
 打开空调
-返回: setACModeControl, SWStatus, 0x01
+#setACModeControl, SWStatus, 0x01#
 
 关闭空调
-返回: setACModeControl, SWStatus, 0x00
+#setACModeControl, SWStatus, 0x00#
 """ 
 
 heatedsteeringwheelmode_prompts = """
@@ -629,10 +587,10 @@ heatedsteeringwheelmode_prompts = """
 用户指令{instruction}: 
 
 打开方向盘加热
-返回: setClimHeatedSteeringWheelMode, SWStatus, 0x01
+#setClimHeatedSteeringWheelMode, SWStatus, 0x01#
 
 关闭方向盘加热
-返回: setClimHeatedSteeringWheelMode, SWStatus, 0x00
+#setClimHeatedSteeringWheelMode, SWStatus, 0x00#
 """ 
 
 climleftventdirection_prompt = """
@@ -643,16 +601,16 @@ climleftventdirection_prompt = """
 用户指令{instruction}: 
 
 设置主驾出风口方向为吹头
-返回: setClimLeftVentDirection, FlowDistrMode, 0x04
+#setClimLeftVentDirection, FlowDistrMode, 0x04#
 
 设置主驾出风口方向为吹脸吹脚
-返回: setClimLeftVentDirection, FlowDistrMode, 0x03
+#setClimLeftVentDirection, FlowDistrMode, 0x03#
 
 设置主驾出风口方向为吹脸
-返回: setClimLeftVentDirection, FlowDistrMode, 0x02
+#setClimLeftVentDirection, FlowDistrMode, 0x02#
 
 设置主驾出风口方向为吹脚
-返回: setClimLeftVentDirection, FlowDistrMode, 0x01
+#setClimLeftVentDirection, FlowDistrMode, 0x01#
 """ 
 
 climrightventdirection_prompt = """
@@ -663,16 +621,16 @@ climrightventdirection_prompt = """
 用户指令{instruction}: 
 
 设置主驾出风口方向为吹头
-返回: setClimRightVentDirection, FlowDistrMode, 0x04
+#setClimRightVentDirection, FlowDistrMode, 0x04#
 
 设置主驾出风口方向为吹脸吹脚
-返回: setClimRightVentDirection, FlowDistrMode, 0x03
+#setClimRightVentDirection, FlowDistrMode, 0x03#
 
 设置主驾出风口方向为吹脸
-返回: setClimRightVentDirection, FlowDistrMode, 0x02
+#setClimRightVentDirection, FlowDistrMode, 0x02#
 
 设置主驾出风口方向为吹脚 | 设置主驾出风口方向为吹角
-返回: setClimRightVentDirection, FlowDistrMode, 0x01
+#setClimRightVentDirection, FlowDistrMode, 0x01#
 """ 
 
 climcirculationmode_prompt = """
@@ -683,10 +641,10 @@ climcirculationmode_prompt = """
 用户指令{instruction}: 
 
 设置空气循环模式为内循环
-返回: setInCirculationMode, CycleState, 0x01
+#setInCirculationMode, CycleState, 0x01#
 
 设置空气循环模式为外循环
-返回: setInCirculationMode, CycleState, 0x02
+#setInCirculationMode, CycleState, 0x02#
 """ 
 
 navigation_prompt = """
@@ -697,7 +655,7 @@ navigation_prompt = """
 用户指令{instruction}: 
 
 打开导航
-返回: LauncherNavigation, address, 0x07
+#LauncherNavigation, address, 0x07#
 """ 
 
 frontwipermode_prompt = """
@@ -708,56 +666,23 @@ frontwipermode_prompt = """
 用户指令{instruction}: 
 
 雨刷低速摆动
-返回: setFrontWiperMode, FrontWiperMode, 0x04
+#setFrontWiperMode, FrontWiperMode, 0x04#
 
 雨刷高速摆动
-返回: setFrontWiperMode, FrontWiperMode, 0x03
+#setFrontWiperMode, FrontWiperMode, 0x03#
 
 雨刷单次摆动
-返回: setFrontWiperMode, FrontWiperMode, 0x02
+#setFrontWiperMode, FrontWiperMode, 0x02#
 
 雨刷间歇摆动
-返回: setFrontWiperMode, FrontWiperMode, 0x01
+#setFrontWiperMode, FrontWiperMode, 0x01#
 
 关闭雨刷
-返回: setFrontWiperMode, FrontWiperMode, 0x00
+#setFrontWiperMode, FrontWiperMode, 0x00#
 """ 
 
-lowbeam_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
 
-举例：
-用户指令{instruction}: 
-
-打开近光灯
-返回: setLowBeamStatus, lampStatus, 0x01
-
-打开小灯
-返回: setLowBeamStatus, lampStatus, 0x01
-
-关闭近光灯
-返回: setLowBeamStatus, lampStatus, 0x00
-
-关闭小灯
-返回: setLowBeamStatus, lampStatus, 0x00
-""" 
-
-highbeam_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开远光灯
-返回: setHighBeamStatus, lampStatus, 0x01
-
-关闭远光灯
-返回: setHighBeamStatus, lampStatus, 0x00
-""" 
-
-positionlamp_prompt = """
+beam_prompt = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
@@ -765,11 +690,44 @@ positionlamp_prompt = """
 用户指令{instruction}: 
 
 打开位置灯
-返回: setPositionLampStatus, PositionlampStatus, 0x01
+#setPositionLampStatus, PositionlampStatus, 0x01#
 
 关闭位置灯
-返回: setPositionLampStatus, PositionlampStatus, 0x00
+#setPositionLampStatus, PositionlampStatus, 0x00#
+
+打开远光灯
+#setHighBeamStatus, lampStatus, 0x01#
+
+关闭远光灯
+#setHighBeamStatus, lampStatus, 0x00#
+
+打开近光灯
+#setLowBeamStatus, lampStatus, 0x01#
+
+打开小灯
+#setLowBeamStatus, lampStatus, 0x01#
+
+关闭近光灯
+#setLowBeamStatus, lampStatus, 0x00#
+
+关闭小灯
+#setLowBeamStatus, lampStatus, 0x00#
 """ 
+
+
+# positionlamp_prompt = """
+# 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+# 不要任何额外内容
+
+# 举例：
+# 用户指令{instruction}: 
+
+# 打开位置灯
+# 返回: setPositionLampStatus, PositionlampStatus, 0x01
+
+# 关闭位置灯
+# 返回: setPositionLampStatus, PositionlampStatus, 0x00
+# """ 
 
 climEVheatermode_prompt = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
@@ -779,10 +737,10 @@ climEVheatermode_prompt = """
 用户指令{instruction}: 
 
 打开空调制热模式
-返回: setClimEVHeaterMode, SWStatus, 0x01
+#setClimEVHeaterMode, SWStatus, 0x01#
 
 关闭空调制热模式
-返回: setClimEVHeaterMode, SWStatus, 0x00
+#setClimEVHeaterMode, SWStatus, 0x00#
 """ 
 
 climAutoNormalMode_prompt = """
@@ -793,15 +751,16 @@ climAutoNormalMode_prompt = """
 用户指令{instruction}: 
 
 打开自动调温模式
-返回: setClimAutoNormalMode, SWStatus, 0x01
+#setClimAutoNormalMode, SWStatus, 0x01#
 
 关闭自动调温模式
-返回: setClimAutoNormalMode, SWStatus, 0x00
+#setClimAutoNormalMode, SWStatus, 0x00#
 """ 
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
 不要任何额外内容
+
 
 举例：
 模糊指令{instruction}：
@@ -855,11 +814,9 @@ select_scene_prompt = """
 38. 空气循环模式
 39. 打开导航
 40. 雨刷设置
-41. 近光灯
-42. 远光灯
-43. 位置灯
-44. 空调制热模式
-45. 自动调温模式
+41. 车外灯
+42. 空调制热模式
+43. 自动调温模式
 
 举例：
 用户指令{instruction}：
@@ -946,13 +903,13 @@ select_scene_prompt = """
 返回： 雨刷设置
 
 打开近光灯 | 关闭静光灯
-返回： 近光灯
+返回： 车外灯
 
 打开远光灯
-返回： 远光灯
+返回： 车外灯
 
 打开位置灯
-返回： 位置灯
+返回： 车外灯
 
 打开空调调温模式
 返回： 空调调温模式

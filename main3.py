@@ -3,7 +3,7 @@ from langchain_core.output_parsers import StrOutputParser
 from base import llm
 from prompts.prompts import *
 import time
-from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction
+from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content
 from utils.template import rz_action_template_lf_window
 from scenecombo.summary import scenario_config_all
 
@@ -36,7 +36,7 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
-    instruction = "我冷了"
+    instruction = "设置空调风速1档"
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
@@ -49,6 +49,9 @@ def main():
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
     scenario = scenario_config_all[label]
     logging.info(f"场景决策: {label}")
+
+    # 返回值
+    action_list = []
 
     if label == '模糊场景':
         # 返回值
@@ -75,7 +78,7 @@ def main():
             logging.info(f"子场景决策: {sub_label}")
 
             #子场景生成
-            sub_json_params_list = string2list(generate_single_scenario(action, sub_scenario.get("prompts")))
+            sub_json_params_list = string2list(extract_identifier_content(generate_single_scenario(action, sub_scenario.get("prompts"))))
             sub_name = sub_json_params_list[0]
 
             # TODO qinxiaocheng
@@ -88,27 +91,30 @@ def main():
         print (f"生成全部json: \n{action_list}")
         end2 = time.time()
         print(f"Execution time: {end2 - start} seconds")
+        return {
+            "scenario_decision": label,
+            "json_config": action_list,
+            "response": response_sentence
+        }
     else:
         # 场景生成
-        json_params_list = string2list(generate_single_scenario(instruction, scenario.get("prompts")))
+        json_params_list = string2list(extract_identifier_content(generate_single_scenario(instruction, scenario.get("prompts"))))
         name = json_params_list[0]
         args = config_args(json_params_list)
         json_params_config = rz_action_template_lf_window(name, args, label)
         logging.info("生成json \n {}".format(json_params_config))
+        print("生成json \n {}".format(json_params_config))
 
-        value = ''
-        if len(json_params_list) == 3:
-            value = json_params_config.get("args")[0]["value"]
-        else:
-            value = json_params_config.get("args")[1]["value"]
-        
-        response_sentence = scenario.get("response")[0].format(scenario[value])
+        response_sentence = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
+
+        print(f"Assistant: {response_sentence}")
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
+        action_list.append(json_params_config)
         print(f"Execution time: {end1 - start} seconds")
         return {
             "scenario_decision": label,
-            "json_config": json_params_config,
+            "json_config": action_list,
             "response": response_sentence
         }
 

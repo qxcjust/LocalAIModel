@@ -15,14 +15,12 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
     music = f"val://Vehicle/static/LauncherService/LauncherMusic/{name}"
     massage = f"val://Vehicle/static/LSSeatCtrl/setSeatMassageMode/{name}"
     wiper = f"val://Vehicle/static/LSWiperWasherCtrl/setFrontWiperMode/{name}"
-    highbeam = f"val://Vehicle/static/LSExteriorLightCtrl/setHighBeamStatus/{name}"
-    lowbeam = f"val://Vehicle/static/LSExteriorLightCtrl/setLowBeamStatus/{name}"
-    positionlamp = f"val://Vehicle/static/LSExteriorLightCtrl/setPositionLampStatus/{name}"
+    beam = f"val://Vehicle/static/LSExteriorLightCtrl/{name}"
     climEVheatermode = f"val://Vehicle/static/LSClimateCtrl/setClimEVHeaterMode/{name}"
     circulationMode = f"val://Vehicle/static/LSClimateCtrl/setInCirculationMode/{name}"
     climFanSpeed = f"val://Vehicle/static/LSClimateCtrl/setClimFanSpeed/{name}"
     ACTempControl = f"val://Vehicle/static/LSClimateCtrl/setACTempControl/{name}"
-
+    ACAutoTemp = f"val://Vehicle/static/LSClimateCtrl/{name}"
     chairctrl = f"val://Vehicle/static/LSSeatCtrl/{name}"
     
     name = ""
@@ -56,12 +54,8 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = massage
     elif label == '雨刷设置':
         name = wiper
-    elif label == '近光灯':
-        name = lowbeam
-    elif label == '远光灯':
-        name = highbeam
-    elif label == '位置灯':
-        name = positionlamp
+    elif label == '车外灯':
+        name = beam
     elif label == '空调制热模式':
         name = climEVheatermode
     elif label == '空气循环模式':
@@ -70,6 +64,9 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = climFanSpeed   
     elif label == '主驾空调温度' or label == '副驾空调温度':
         name = ACTempControl 
+    elif label == '自动调温模式':
+        name = ACAutoTemp
+
 
     rz_action_template_lf_window = {
         'name': name,

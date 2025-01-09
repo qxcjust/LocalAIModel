@@ -53,4 +53,33 @@ def match_fuzzy_instruction(instruction, instructions):
             similarity_score = temp
     return returntext
 
+def generate_response_sentence(label, json_params_config, scenario, json_params_list, name):
+    if label == '车外灯':
+        value = ''
+        if len(json_params_list) == 3:
+            value = json_params_config.get("args")[0]["value"]
+        else:
+            value = json_params_config.get("args")[1]["value"]
+        response_sentence = scenario.get("response")[0].format(scenario[name], scenario[value])
+        return response_sentence
+    else:
+        value = ''
+        if len(json_params_list) == 3:
+            value = json_params_config.get("args")[0]["value"]
+        else:
+            value = json_params_config.get("args")[1]["value"]
+        response_sentence = scenario.get("response")[0].format(scenario[value])
+        return response_sentence
+    
+import re
+ 
+def extract_identifier_content(text):
+    # 正则表达式匹配两个井号之间的内容
+    pattern = re.compile(r"#\s*(.*?)\s*#")
+    match = pattern.search(text)
+    if match:
+        return match.group(1)
+    else:
+        return None
+
 

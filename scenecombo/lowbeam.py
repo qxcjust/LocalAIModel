@@ -1,7 +1,7 @@
 from prompts.prompts import *
 
 lowbeam = {
-    "prompts": lowbeam_prompt,
+    "prompts": beam_prompt,
     "response": [
         "好的，近光灯已{}",
     ],
