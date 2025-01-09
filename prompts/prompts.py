@@ -578,6 +578,102 @@ ambientlight_prompts = """
 返回: setAmbientLightColor, Color, 0x0d
 """
 
+climatcleaness_prompts = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开PM2.5空气净化器 | 打开空气净化器
+返回: setClimatCleaness, CleanMode, 0x02
+
+关闭PM2.5空气净化器 | 关闭空气净化器
+返回: setClimatCleaness, CleanMode, 0x01
+""" 
+
+climatsyncmode_prompts = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+启动同步模式
+返回: setClimatSyncMode, SWStatus, 0x01
+
+关闭同步模式
+返回: setClimatSyncMode, SWStatus, 0x00
+""" 
+
+
+acmodectrl_prompts = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开空调
+返回: setACModeControl, SWStatus, 0x01
+
+关闭空调
+返回: setACModeControl, SWStatus, 0x00
+""" 
+
+heatedsteeringwheelmode_prompts = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开方向盘加热
+返回: setClimHeatedSteeringWheelMode, SWStatus, 0x01
+
+关闭方向盘加热
+返回: setClimHeatedSteeringWheelMode, SWStatus, 0x00
+""" 
+
+climleftventdirection_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置主驾出风口方向为吹头
+返回: setClimLeftVentDirection, FlowDistrMode, 0x04
+
+设置主驾出风口方向为吹脸吹脚
+返回: setClimLeftVentDirection, FlowDistrMode, 0x03
+
+设置主驾出风口方向为吹脸
+返回: setClimLeftVentDirection, FlowDistrMode, 0x02
+
+设置主驾出风口方向为吹脚
+返回: setClimLeftVentDirection, FlowDistrMode, 0x01
+""" 
+
+climrightventdirection_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置主驾出风口方向为吹头
+返回: setClimRightVentDirection, FlowDistrMode, 0x04
+
+设置主驾出风口方向为吹脸吹脚
+返回: setClimRightVentDirection, FlowDistrMode, 0x03
+
+设置主驾出风口方向为吹脸
+返回: setClimRightVentDirection, FlowDistrMode, 0x02
+
+设置主驾出风口方向为吹脚 | 设置主驾出风口方向为吹角
+返回: setClimRightVentDirection, FlowDistrMode, 0x01
+""" 
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
@@ -626,6 +722,12 @@ select_scene_prompt = """
 29. 关闭主驾座椅加热模式
 20. 关闭副驾座椅加热模式
 31. 模糊场景
+32. 空气净化器
+33. 同步模式
+34. 空调控制
+35. 方向盘加热
+36. 主驾出风口
+37. 副驾出风口
 
 举例：
 用户指令{instruction}：
@@ -648,7 +750,7 @@ select_scene_prompt = """
 打开副驾座椅按摩
 返回： 副驾座椅按摩
 
-打开副驾座椅加热模式3档
+打开副驾座椅加热模式3档 | 关闭副驾座椅加热模式
 返回： 副驾座椅加热
 
 设置主驾空调温度22度
@@ -674,6 +776,24 @@ select_scene_prompt = """
 
 设置氛围灯颜色为红色
 返回： 氛围灯
+
+打开PM2.5空气净化器
+返回： 空气净化器
+
+启动同步模式
+返回： 同步模式
+
+打开空调 | 关闭空调
+返回： 空调控制
+
+打开方向盘加热  | 关闭方向盘加热
+返回： 方向盘加热
+
+设置主驾出风口方向为吹头
+返回： 主驾出风口
+
+设置副驾出风口方向为吹脸
+返回： 副驾出风口
 
 我累了
 返回： 模糊场景

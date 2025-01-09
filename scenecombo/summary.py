@@ -11,7 +11,12 @@ from scenecombo.music import *
 from scenecombo.climFanSpeed import *
 from scenecombo.seatAutoMode import *
 from scenecombo.ambientlight import *
+from scenecombo.climatcleaness import *
 from scenecombo.FuzzyInstructionScene import *
+from scenecombo.climatsyncmode import *
+from scenecombo.acmodectrl import *
+from scenecombo.heatedsteeringwheelmode import *
+from scenecombo.ventdirection import *
 
 scenario_config_all = {
     '主驾车窗': front_lef_window,
@@ -44,6 +49,12 @@ scenario_config_all = {
     '主驾座椅自动通风加热': left_Seatautomode,
     '副驾座椅自动通风加热': right_Seatautomode,
     '氛围灯': ambientlight,
-    '模糊场景': FuzzyInstruction
+    '空气净化器': climatcleaness,
+    '同步模式': climatsyncmode,
+    '空调控制': acmodectrl,
+    '方向盘加热': heatedsteeringwheelmode,    
+    '模糊场景': FuzzyInstruction,
+    '主驾出风口': climleftventdirection,
+    '副驾出风口': climrightventdirection
 }
 
