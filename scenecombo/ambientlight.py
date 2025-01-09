@@ -1,15 +1,18 @@
 from prompts.prompts import *
 
 ambientlight = {
-    "prompts": right_window_scene,
+    "prompts": ambientlight,
     "response": [
-        "好的，为您{}副驾车窗",
-        "好的，为您{}右前车窗",
-        "了解， 我已帮您{}右侧的车窗"
+        "好的，氛围灯颜色已经设置为{}",
     ],
     'responsefuzzy': [
-        "已经为您自动执行打开右前的车窗{}"
+        "氛围灯颜色已经设置为{}"
     ],
-    "0x01": "打开",
-    "0x15": "关闭"
+    "0x01": "关闭状态",
+    "0x02": "红色",
+    "0x03": "黄色",
+    "0x04": "橙色",
+    "0x05": "蓝色",
+    "0x0c": "闪烁模式",
+    "0x0d": "呼吸模式",
 }

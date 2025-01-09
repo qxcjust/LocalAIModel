@@ -565,6 +565,27 @@ frSeatautomode = """
 返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00
 """
 
+ambientlight = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+关闭氛围灯
+返回: setAmbientLightColor, Color, 0x01
+
+红色: 0x02, 黄色: 0x03, 橙色: 0x04, 蓝色: 0x05  
+设置氛围灯颜色为红色
+返回: setAmbientLightColor, Color, 0x02
+
+设置氛围灯闪烁模式
+返回: setAmbientLightColor, Color, 0x0c
+
+设置氛围灯呼吸模式
+返回: setAmbientLightColor, Color, 0x0d
+"""
+
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
@@ -612,6 +633,7 @@ select_scene_prompt = """
 28. 副驾座椅自动通风加热
 29. 关闭主驾座椅加热模式
 30. 关闭副驾座椅加热模式
+31. 模糊场景
 
 举例：
 用户指令{instruction}：
@@ -651,4 +673,16 @@ select_scene_prompt = """
 
 打开主驾座椅自动通风加热
 返回： 主驾座椅自动通风加热
+
+设置氛围灯颜色为红色
+返回： 氛围灯
+
+我累了
+返回： 模糊场景
+
+老婆生气了
+返回： 模糊场景
+
+太冷了
+返回： 模糊场景
 """

@@ -10,6 +10,8 @@ from scenecombo.ACTempControl import *
 from scenecombo.music import *
 from scenecombo.climFanSpeed import *
 from scenecombo.seatAutoMode import *
+from scenecombo.ambientlight import *
+from scenecombo.FuzzyInstructionScene import *
 
 scenario_config = {
     '开左前车窗': lfwindow,
@@ -67,6 +69,8 @@ scenario_config_all = {
     '设置空调风速': setclimatefanspeed,
     '关闭空调风扇': closeclimatefanspeed,
     '主驾座椅自动通风加热': left_Seatautomode,
-    '副驾座椅自动通风加热': right_Seatautomode    
+    '副驾座椅自动通风加热': right_Seatautomode,
+    '氛围灯': ambientlight,
+    '模糊场景': FuzzyInstruction
 }
 
