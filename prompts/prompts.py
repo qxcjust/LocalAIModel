@@ -733,13 +733,13 @@ lowbeam_prompt = """
 打开近光灯
 返回: setLowBeamStatus, lampStatus, 0x01
 
-打开小灯 | 静光灯
+打开小灯
 返回: setLowBeamStatus, lampStatus, 0x01
 
 关闭近光灯
 返回: setLowBeamStatus, lampStatus, 0x00
 
-关闭小灯 | 静光灯
+关闭小灯
 返回: setLowBeamStatus, lampStatus, 0x00
 """ 
 
@@ -769,6 +769,34 @@ positionlamp_prompt = """
 
 关闭位置灯
 返回: setPositionLampStatus, PositionlampStatus, 0x00
+""" 
+
+climEVheatermode_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开空调制热模式
+返回: setClimEVHeaterMode, SWStatus, 0x01
+
+关闭空调制热模式
+返回: setClimEVHeaterMode, SWStatus, 0x00
+""" 
+
+climAutoNormalMode_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开自动调温模式
+返回: setClimAutoNormalMode, SWStatus, 0x01
+
+关闭自动调温模式
+返回: setClimAutoNormalMode, SWStatus, 0x00
 """ 
 
 fuzzy_instruction_prompt = """
@@ -830,6 +858,8 @@ select_scene_prompt = """
 41. 近光灯
 42. 远光灯
 43. 位置灯
+44. 空调制热模式
+45. 自动调温模式
 
 举例：
 用户指令{instruction}：
@@ -906,7 +936,7 @@ select_scene_prompt = """
 雨刷高速摆动
 返回： 雨刷设置
 
-打开近光灯
+打开近光灯 | 关闭静光灯
 返回： 近光灯
 
 打开远光灯
@@ -914,6 +944,12 @@ select_scene_prompt = """
 
 打开位置灯
 返回： 位置灯
+
+打开空调调温模式
+返回： 空调调温模式
+
+打开空调制热模式
+返回： 空调制热模式
 
 我累了
 返回： 模糊场景

@@ -23,6 +23,8 @@ from scenecombo.frontwipermode import *
 from scenecombo.lowbeam import *
 from scenecombo.highbeam import *
 from scenecombo.positionbeam import *
+from scenecombo.climAutoNormalMode import *
+from scenecombo.climEVheatermode import *
 
 scenario_config_all = {
     '主驾车窗': front_lef_window,
@@ -67,6 +69,8 @@ scenario_config_all = {
     '雨刷设置': frontwipermode,
     '远光灯': highbeam,
     '近光灯': lowbeam,
-    '位置灯': positionlamp
+    '位置灯': positionlamp,
+    '空调制热模式': climEVheatermode,
+    '自动调温模式': climAutoNormalMode
 }
 
