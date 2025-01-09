@@ -17,6 +17,12 @@ from scenecombo.climatsyncmode import *
 from scenecombo.acmodectrl import *
 from scenecombo.heatedsteeringwheelmode import *
 from scenecombo.ventdirection import *
+from scenecombo.circulationmode import *
+from scenecombo.navigation import *
+from scenecombo.frontwipermode import *
+from scenecombo.lowbeam import *
+from scenecombo.highbeam import *
+from scenecombo.positionbeam import *
 
 scenario_config_all = {
     '主驾车窗': front_lef_window,
@@ -55,6 +61,12 @@ scenario_config_all = {
     '方向盘加热': heatedsteeringwheelmode,    
     '模糊场景': FuzzyInstruction,
     '主驾出风口': climleftventdirection,
-    '副驾出风口': climrightventdirection
+    '副驾出风口': climrightventdirection,
+    '空气循环模式': climcirculationmode,
+    '打开导航': navigation,
+    '雨刷设置': frontwipermode,
+    '远光灯': highbeam,
+    '近光灯': lowbeam,
+    '位置灯': positionlamp
 }
 

@@ -675,6 +675,102 @@ climrightventdirection_prompt = """
 返回: setClimRightVentDirection, FlowDistrMode, 0x01
 """ 
 
+climcirculationmode_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+设置空气循环模式为内循环
+返回: setInCirculationMode, CycleState, 0x01
+
+设置空气循环模式为外循环
+返回: setInCirculationMode, CycleState, 0x02
+""" 
+
+navigation_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开导航
+返回: LauncherNavigation, address, 0x07
+""" 
+
+frontwipermode_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+雨刷低速摆动
+返回: setFrontWiperMode, FrontWiperMode, 0x04
+
+雨刷高速摆动
+返回: setFrontWiperMode, FrontWiperMode, 0x03
+
+雨刷单次摆动
+返回: setFrontWiperMode, FrontWiperMode, 0x02
+
+雨刷间歇摆动
+返回: setFrontWiperMode, FrontWiperMode, 0x01
+
+关闭雨刷
+返回: setFrontWiperMode, FrontWiperMode, 0x00
+""" 
+
+lowbeam_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开近光灯
+返回: setLowBeamStatus, lampStatus, 0x01
+
+打开小灯 | 静光灯
+返回: setLowBeamStatus, lampStatus, 0x01
+
+关闭近光灯
+返回: setLowBeamStatus, lampStatus, 0x00
+
+关闭小灯 | 静光灯
+返回: setLowBeamStatus, lampStatus, 0x00
+""" 
+
+highbeam_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开远光灯
+返回: setHighBeamStatus, lampStatus, 0x01
+
+关闭远光灯
+返回: setHighBeamStatus, lampStatus, 0x00
+""" 
+
+positionlamp_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开位置灯
+返回: setPositionLampStatus, PositionlampStatus, 0x01
+
+关闭位置灯
+返回: setPositionLampStatus, PositionlampStatus, 0x00
+""" 
+
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
 不要任何额外内容
@@ -728,6 +824,12 @@ select_scene_prompt = """
 35. 方向盘加热
 36. 主驾出风口
 37. 副驾出风口
+38. 空气循环模式
+39. 打开导航
+40. 雨刷设置
+41. 近光灯
+42. 远光灯
+43. 位置灯
 
 举例：
 用户指令{instruction}：
@@ -794,6 +896,24 @@ select_scene_prompt = """
 
 设置副驾出风口方向为吹脸
 返回： 副驾出风口
+
+设置空气循环模式为内循环
+返回： 空气循环模式
+
+导航回家
+返回： 打开导航
+
+雨刷高速摆动
+返回： 雨刷设置
+
+打开近光灯
+返回： 近光灯
+
+打开远光灯
+返回： 远光灯
+
+打开位置灯
+返回： 位置灯
 
 我累了
 返回： 模糊场景
