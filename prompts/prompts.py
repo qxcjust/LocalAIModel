@@ -363,18 +363,6 @@ closefrSeatHeat = """
 返回: setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01
 """
 
-ambientlight = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-关闭氛围灯
-
-"""
-
-
 flACTempControl = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -569,7 +557,7 @@ frSeatautomode = """
 返回: setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00
 """
 
-ambientlight = """
+ambientlight_prompts = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 

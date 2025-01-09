@@ -1,7 +1,7 @@
 from prompts.prompts import *
 
 ambientlight = {
-    "prompts": ambientlight,
+    "prompts": ambientlight_prompts,
     "response": [
         "好的，氛围灯颜色已经设置为{}",
     ],

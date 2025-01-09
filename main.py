@@ -100,23 +100,16 @@ async def process_instruction(input: InstructionInput):
         # 场景生成
         json_params_list = string2list(generate_single_scenario(instruction, scenario.get("prompts")))
         name = json_params_list[0]
-        args = [
-            {
-                "name": json_params_list[1],
-                "type": json_params_list[1],
-                "value": json_params_list[2]
-            },
-            {
-                "name": json_params_list[3],
-                "type": json_params_list[3],
-                "value": json_params_list[4]
-            }
-        ]
-        #json_params_config = rz_action_template_lf_window(name, args)
+        args = config_args(json_params_list)
         json_params_config = rz_action_template_lf_window(name, args, label)
         logging.info("生成json \n {}".format(json_params_config))
 
-        value = json_params_config.get("args")[1]["value"]
+        value = ''
+        if len(json_params_list) == 3:
+            value = json_params_config.get("args")[0]["value"]
+        else:
+            value = json_params_config.get("args")[1]["value"]
+        
         response_sentence = scenario.get("response")[0].format(scenario[value])
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
