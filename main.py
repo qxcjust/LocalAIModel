@@ -96,6 +96,11 @@ async def process_instruction(input: InstructionInput):
         print (f"生成全部json: \n{action_list}")
         end2 = time.time()
         print(f"Execution time: {end2 - start} seconds")
+        return {
+            "scenario_decision": label,
+            "json_config": action_list,
+            "response": response_sentence
+        }
     else:
         # 场景生成
         json_params_list = string2list(generate_single_scenario(instruction, scenario.get("prompts")))
