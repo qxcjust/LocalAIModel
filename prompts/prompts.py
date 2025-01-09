@@ -113,10 +113,10 @@ right_door = """
 举例：
 用户指令{instruction}: 
 
-请帮我副驾车门
+请帮我打开副驾车门
 返回: setLockState, DoorID, 0x02, LockState, 0x01
 
-请帮我副驾车门
+请帮我关闭副驾车门
 返回: setLockState, DoorID, 0x02, LockState, 0x02
 """
 
