@@ -5,16 +5,16 @@ left_window_scene = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开左侧车窗
+打开左侧车窗
 返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
 
-请帮我打开主驾车窗
+打开主驾车窗
 返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
 
 关闭主驾驶车窗
 返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15
 
-请帮我打开左前车窗
+打开左前车窗
 返回: setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01
 """
 
@@ -25,10 +25,10 @@ left_back_window_scene = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开左后车窗
+打开左后车窗
 返回: setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01
 
-请帮我关闭左后车窗
+关闭左后车窗
 返回: setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15
 """
 
@@ -39,16 +39,16 @@ right_window_scene = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开右侧车窗
+打开右侧车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
 
-请帮我打开副驾车窗
+打开副驾车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
 
-关闭副驾驶车窗
+副驾驶车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15
 
-请帮我打开右前车窗
+打开右前车窗
 返回: setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01
 """
 
@@ -59,10 +59,10 @@ right_back_window_scene = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开右后车窗
+打开右后车窗
 返回: setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01
 
-请帮我关闭右后车窗
+关闭右后车窗
 返回: setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x15
 """
 
@@ -73,10 +73,10 @@ all_window_scene = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开全部车窗
+打开全部车窗
 返回: setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x01
 
-请帮我关闭全部车窗
+关闭全部车窗
 返回: setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15
 """
 
@@ -87,22 +87,22 @@ left_door = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开车门
+打开主驾车门
 返回: setLockState, DoorID, 0x01, LockState, 0x01
 
-请帮我关闭车门
+关闭主驾车门
 返回: setLockState, DoorID, 0x01, LockState, 0x02
 
-请帮我打开主驾车门
+打开主驾车门
 返回: setLockState, DoorID, 0x01, LockState, 0x01
 
-请帮我关闭主驾车门
+关闭主驾车门
 返回: setLockState, DoorID, 0x01, LockState, 0x02
 
-请帮我打开左车门
+打开左车门
 返回: setLockState, DoorID, 0x01, LockState, 0x01
 
-请帮我关闭左车门
+关闭左车门
 返回: setLockState, DoorID, 0x01, LockState, 0x02
 """
 
@@ -113,10 +113,10 @@ right_door = """
 举例：
 用户指令{instruction}: 
 
-请帮我打开副驾车门
+打开副驾车门
 返回: setLockState, DoorID, 0x02, LockState, 0x01
 
-请帮我关闭副驾车门
+关闭副驾车门
 返回: setLockState, DoorID, 0x02, LockState, 0x02
 """
 
@@ -127,10 +127,10 @@ left_front_mirror = """
 举例：
 用户指令{instruction}: 
 
-请帮我展开左后视镜
+展开左后视镜
 返回: setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01
 
-请帮我折叠左后视镜
+折叠左后视镜
 返回: setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x02
 """
 
@@ -141,10 +141,10 @@ right_front_mirror = """
 举例：
 用户指令{instruction}: 
 
-请帮我展开右后视镜
+展开右后视镜
 返回: setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x01
 
-请帮我折叠右后视镜
+折叠右后视镜
 返回: setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02
 """
 
@@ -661,6 +661,12 @@ select_scene_prompt = """
 
 设置主驾空调温度22度
 返回： 主驾空调温度
+
+展开左后视镜
+返回： 左后视镜
+
+展开右后视镜
+返回： 右后视镜
 
 播放舒缓音乐
 返回： 播放音乐
