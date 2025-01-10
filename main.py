@@ -61,7 +61,30 @@ async def process_instruction(input: InstructionInput):
     # 返回值
     action_list = []
 
-    if label == '模糊场景':
+    if label != '模糊场景':
+        # 场景生成
+        json_params_list = string2list(extract_identifier_content(generate_single_scenario(instruction, scenario.get("prompts"))))
+        name = json_params_list[0]
+        args = config_args(json_params_list)
+        json_params_config = rz_action_template_lf_window(name, args, label)
+        logging.info("生成json \n {}".format(json_params_config))
+
+        response_sentence, checkStatus = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
+        if checkStatus == True:
+            pass
+        else:
+            action_list.append(json_params_config)
+
+        logging.info(f"Assistant: {response_sentence}")
+        end1 = time.time()
+
+        print(f"Execution time: {end1 - start} seconds")
+        return {
+            "scenario_decision": label,
+            "json_config": action_list,
+            "response": response_sentence
+        }
+    else:
         # 返回值
         action_list = []
 
@@ -99,32 +122,6 @@ async def process_instruction(input: InstructionInput):
         print (f"生成全部json: \n{action_list}")
         end2 = time.time()
         print(f"Execution time: {end2 - start} seconds")
-        return {
-            "scenario_decision": label,
-            "json_config": action_list,
-            "response": response_sentence
-        }
-    else:
-        # 场景生成
-        json_params_list = string2list(extract_identifier_content(generate_single_scenario(instruction, scenario.get("prompts"))))
-        name = json_params_list[0]
-        args = config_args(json_params_list)
-        json_params_config = rz_action_template_lf_window(name, args, label)
-        logging.info("生成json \n {}".format(json_params_config))
-        print("生成json \n {}".format(json_params_config))
-
-        response_sentence, checkStatus = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
-        if checkStatus == True:
-            pass
-        else:
-            action_list.append(json_params_config)
-
-        print(f"Assistant: {response_sentence}")
-        
-        logging.info(f"Assistant: {response_sentence}")
-        end1 = time.time()
-
-        print(f"Execution time: {end1 - start} seconds")
         return {
             "scenario_decision": label,
             "json_config": action_list,

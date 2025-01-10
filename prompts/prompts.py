@@ -387,42 +387,19 @@ frACTempControl = """
 设置设置副驾空调温度32度
 #setACTempControl, AreaID, 0x02, Temp, 32#
 """
-
-stopmusic = """
+musicctrl_prompt = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
 
 举例：
 用户指令{instruction}: 
-
-停止播放音乐
-#LauncherMusic, MusicId, 0x00, MusicType, 0x01#
 
 停止音乐
 #LauncherMusic, MusicId, 0x00, MusicType, 0x01#
-"""
 
-playmusic = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
+0x01:舒缓音乐, 0x02:歌剧音乐, 0x03:钢琴曲, 0x04:流行音乐, 0x05:小提琴音乐
 播放舒缓音乐
 #LauncherMusic, MusicId, 0x01, MusicType, 0x01#
-
-播放歌剧音乐
-#LauncherMusic, MusicId, 0x01, MusicType, 0x02#
-
-播放钢琴曲
-#LauncherMusic, MusicId, 0x01, MusicType, 0x03#
-
-播放流行音乐
-#LauncherMusic, MusicId, 0x01, MusicType, 0x04#
-
-播放小提琴音乐
-#LauncherMusic, MusicId, 0x01, MusicType, 0x05#
 """
 
 climate_fanspeed = """
@@ -432,34 +409,9 @@ climate_fanspeed = """
 举例：
 用户指令{instruction}: 
 
-设置空调风速1档
+一档: 0x01, 二档: 0x02, 三档: 0x03, 四档: 0x04, 五档: 0x05, 六档: 0x06, 七档: 0x07
+设置空调风速一档
 #setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x01#
-
-设置空调风速2档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x02#
-
-设置空调风速3档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
-
-设置空调风速4档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x04#
-
-设置空调风速5档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x05#
-
-设置空调风速6档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x06#
-
-设置空调风速7档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x07#
-"""
-
-close_fanspeed = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
 
 关闭空调风扇
 #setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00#
@@ -780,9 +732,7 @@ select_scene_prompt = """
 21. 主驾空调温度
 22. 副驾空调温度
 23. 播放音乐
-24. 停止播放音乐
 25. 设置空调风速
-26. 关闭空调风扇
 27. 主驾座椅自动通风加热
 28. 副驾座椅自动通风加热
 29. 关闭主驾座椅加热模式
@@ -858,8 +808,8 @@ select_scene_prompt = """
 播放舒缓音乐
 返回： 播放音乐
 
-停止播放音乐
-返回： 停止播放音乐
+停止音乐
+返回： 播放音乐
 
 设置空调风速6档
 返回： 设置空调风速

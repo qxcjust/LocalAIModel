@@ -48,7 +48,7 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = DimmingGlass
     elif label == '打开导航':
         name = navigation
-    elif label == '播放音乐' or label == '停止播放音乐':
+    elif label == '播放音乐':
         name = music
     elif label == '主驾座椅按摩' or label == '副驾座椅按摩':
         name = massage
