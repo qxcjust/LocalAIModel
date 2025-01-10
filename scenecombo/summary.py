@@ -35,7 +35,7 @@ scenario_config_all = {
     '主驾座椅': lfchair,
     '副驾座椅': rlchair,
     '主驾车门': lfdoor,
-    '副驾车门': lfdoor,
+    '副驾车门': rfdoor,
     '左侧后视镜': left_mirror,
     '右侧后视镜': right_mirror,
     '前排调光玻璃': front_dimmingglass,
