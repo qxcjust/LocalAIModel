@@ -39,8 +39,10 @@ def Albert_scenario_select(instruction):
         template=select_scene_prompt,
         input_variables=["query"]
     )
+    logging.info(f"Albert_scenario_select: {instruction}")
     chain = prompt | llm | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction})
+    logging.info(f"Albert_scenario_select: scenario: {scenario}")
     return scenario
 
 @app.post("/process_instruction")
