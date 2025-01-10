@@ -92,18 +92,6 @@ left_door = """
 
 关闭主驾车门
 #setLockState, DoorID, 0x01, LockState, 0x02#
-
-打开主驾车门
-#setLockState, DoorID, 0x01, LockState, 0x01#
-
-关闭主驾车门
-#setLockState, DoorID, 0x01, LockState, 0x02#
-
-打开左车门
-#setLockState, DoorID, 0x01, LockState, 0x01#
-
-关闭左车门
-#setLockState, DoorID, 0x01, LockState, 0x02#
 """
 
 right_door = """
@@ -816,16 +804,7 @@ select_scene_prompt = """
 举例：
 用户指令{instruction}：
 
-我累了
-返回： 模糊场景
-
-老婆生气了
-返回： 模糊场景
-
-太冷了
-返回： 模糊场景
-
-打开主驾车门 | 关闭主驾车门
+打开主驾车门
 返回： 主驾车门
 
 关闭主驾车门
@@ -837,6 +816,14 @@ select_scene_prompt = """
 关闭副驾车门
 返回： 副驾车门
 
+我累了
+返回： 模糊场景
+
+老婆生气了
+返回： 模糊场景
+
+太冷了
+返回： 模糊场景
 
 打开主驾车窗
 返回： 主驾车窗
