@@ -28,9 +28,10 @@ def generate_single_scenario(instruction, prompts):
         template=prompts,
         input_variables=["query"]
     )
+    logging.info(f"generate_single_scenario: {instruction} prompts:{prompts}")
     chain = prompt | llm | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction})
-    print (scenario)
+    logging.info (scenario)
     return scenario
 
 def Albert_scenario_select(instruction):

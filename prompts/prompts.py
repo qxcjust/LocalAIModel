@@ -253,14 +253,9 @@ flVentilation = """
 举例：
 用户指令{instruction}: 
 
-设置主驾座椅通风模式3档
+0x07: 三档, 0x06: 二档, 0x05: 一档
+设置主驾座椅通风模式三档
 #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x07#
-
-设置主驾座椅通风模式2档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x06#
-
-设置主驾座椅通风模式1档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x05#
 
 关闭主驾座椅通风
 #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
@@ -274,14 +269,9 @@ frVentilation = """
 举例：
 用户指令{instruction}: 
 
+0x07: 三档, 0x06: 二档, 0x05: 一档
 设置副驾座椅通风模式三档
 #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
-
-设置副驾座椅通风模式二档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x06#
-
-设置副驾座椅通风模式一档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05#
 
 关闭副驾座椅通风
 #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x00#
@@ -294,14 +284,9 @@ flSeatHeat = """
 举例：
 用户指令{instruction}: 
 
+0x04: 三档, 0x03: 二档, 0x02:一档
 设置主驾座椅加热模式三档
 #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x04#
-
-设置主驾座椅加热模式二档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x03#
-
-设置主驾座椅加热模式一档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
 
 关闭主驾座椅加热
 #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01#
@@ -327,14 +312,9 @@ frSeatHeat = """
 举例：
 用户指令{instruction}: 
 
+0x04: 三档, 0x03: 二档, 0x02: 一档
 设置副驾座椅加热模式三档
 #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x04#
-
-设置副驾座椅加热模式二档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x03#
-
-设置副驾座椅加热模式一档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x02#
 
 关闭副驾座椅加热
 #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
@@ -380,9 +360,6 @@ frACTempControl = """
 
 设置设置副驾空调温度22度
 #setACTempControl, AreaID, 0x02, Temp, 22#
-
-设置设置副驾空调温度31度
-#setACTempControl, AreaID, 0x02, Temp, 31#
 
 设置设置副驾空调温度32度
 #setACTempControl, AreaID, 0x02, Temp, 32#
@@ -600,17 +577,9 @@ frontwipermode_prompt = """
 举例：
 用户指令{instruction}: 
 
+0x04: 低速摆动, 0x03: 高速摆动, 0x02:单次摆动, 0x01:间歇摆动
 雨刷低速摆动
 #setFrontWiperMode, FrontWiperMode, 0x04#
-
-雨刷高速摆动
-#setFrontWiperMode, FrontWiperMode, 0x03#
-
-雨刷单次摆动
-#setFrontWiperMode, FrontWiperMode, 0x02#
-
-雨刷间歇摆动
-#setFrontWiperMode, FrontWiperMode, 0x01#
 
 关闭雨刷
 #setFrontWiperMode, FrontWiperMode, 0x00#
@@ -648,21 +617,6 @@ beam_prompt = """
 关闭小灯
 #setLowBeamStatus, lampStatus, 0x00#
 """ 
-
-
-# positionlamp_prompt = """
-# 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-# 不要任何额外内容
-
-# 举例：
-# 用户指令{instruction}: 
-
-# 打开位置灯
-# 返回: setPositionLampStatus, PositionlampStatus, 0x01
-
-# 关闭位置灯
-# 返回: setPositionLampStatus, PositionlampStatus, 0x00
-# """ 
 
 climEVheatermode_prompt = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
