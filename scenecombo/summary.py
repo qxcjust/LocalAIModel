@@ -27,11 +27,7 @@ from scenecombo.climAutoNormalMode import *
 from scenecombo.climEVheatermode import *
 
 scenario_config_all = {
-    '主驾车窗': front_lef_window,
-    '副驾车窗': front_right_window,
-    '左后车窗': rear_left_window,
-    '右后车窗': rear_right_window,
-    '所有车窗': allwindow,       
+    '车窗场景': window_scene_obj,
     '主驾座椅': lfchair,
     '副驾座椅': rlchair,
     '主驾车门': lfdoor,

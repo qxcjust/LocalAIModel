@@ -16,13 +16,24 @@ from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 ### base fastapi add interfase
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
+import difflib
 
 app = FastAPI()
 
 class InstructionInput(BaseModel):
     instruction: str
 
+def get_closest_match(label, scenario_config_all):
+    # 获取所有配置项的键
+    scenario_keys = list(scenario_config_all.keys())
+    # 使用difflib的get_close_matches方法来寻找最接近的匹配项
+    closest_matches = difflib.get_close_matches(label, scenario_keys, n=1, cutoff=0.6)
+    # 如果找到了匹配项，则返回对应的配置项，否则返回None
+    if closest_matches:
+        return scenario_config_all[closest_matches[0]]
+    else:
+        return None
+    
 def generate_single_scenario(instruction, prompts):
     prompt = PromptTemplate(
         template=prompts,
@@ -58,8 +69,11 @@ async def process_instruction(input: InstructionInput):
 
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
-    scenario = scenario_config_all[label]
+    #scenario = scenario_config_all[label]
+    scenario = get_closest_match(label, scenario_config_all)
     logging.info(f"场景决策: {label}")
+    end1 = time.time()
+    logging.info(f"场景决策 Execution time: {end1 - start} seconds")
 
     # 返回值
     action_list = []
@@ -69,6 +83,8 @@ async def process_instruction(input: InstructionInput):
         json_params_list = string2list(extract_identifier_content(generate_single_scenario(instruction, scenario.get("prompts"))))
         name = json_params_list[0]
         args = config_args(json_params_list)
+        end2 = time.time()
+        logging.info(f"场景生成 Execution time: {end2 - end1} seconds")
         json_params_config = rz_action_template_lf_window(name, args, label)
         logging.info("生成json \n {}".format(json_params_config))
 
@@ -123,8 +139,8 @@ async def process_instruction(input: InstructionInput):
 
             action_list.append(sub_json_params_config)
         print (f"生成全部json: \n{action_list}")
-        end2 = time.time()
-        print(f"Execution time: {end2 - start} seconds")
+        end3 = time.time()
+        print(f"Total Execution time: {end3 - start} seconds")
         return {
             "scenario_decision": label,
             "json_config": action_list,

@@ -80,6 +80,56 @@ all_window_scene = """
 #setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15#
 """
 
+window_scene = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开左侧车窗
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
+
+打开主驾车窗
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
+
+关闭主驾驶车窗
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15#
+
+打开左前车窗
+#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
+
+打开左后车窗
+#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01#
+
+关闭左后车窗
+#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15#
+
+打开右侧车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
+
+打开副驾车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
+
+关闭副驾驶车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15#
+
+打开右前车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
+
+打开右后车窗
+#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01#
+
+关闭右后车窗
+#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x15#
+
+打开全部车窗
+#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x01#
+
+关闭全部车窗
+#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15#
+"""
+
 left_door = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -663,47 +713,43 @@ select_scene_prompt = """
 不要任何额外内容
 
 所有场景：
-1. 主驾车窗
-2. 副驾车窗
-3. 左后车窗
-4. 右后车窗
-5. 所有车窗      
-6. 主驾座椅
-7. 副驾座椅
-8. 主驾车门
-9. 副驾车门
-10. 左侧后视镜
-11. 右侧后视镜
-12. 前排调光玻璃
-13. 后排调光玻璃
-14. 主驾座椅按摩
-15. 副驾座椅按摩
-16. 主驾座椅通风模式
-17. 副驾座椅通风模式   
-18. 主驾座椅加热模式
-19. 副驾座椅加热模式
-20. 氛围灯
-21. 主驾空调温度
-22. 副驾空调温度
-23. 播放音乐
-25. 设置空调风速
-27. 主驾座椅自动通风加热
-28. 副驾座椅自动通风加热
-29. 关闭主驾座椅加热模式
-20. 关闭副驾座椅加热模式
-31. 模糊场景
-32. 空气净化器
-33. 同步模式
-34. 空调控制
-35. 方向盘加热
-36. 主驾出风口
-37. 副驾出风口
-38. 空气循环模式
-39. 打开导航
-40. 雨刷设置
-41. 车外灯
-42. 空调制热模式
-43. 自动调温模式
+1. 车窗场景      
+2. 主驾座椅
+3. 副驾座椅
+4. 主驾车门
+5. 副驾车门
+6. 左侧后视镜
+7. 右侧后视镜
+8. 前排调光玻璃
+9. 后排调光玻璃
+10. 主驾座椅按摩
+11. 副驾座椅按摩
+12. 主驾座椅通风模式
+13. 副驾座椅通风模式   
+14. 主驾座椅加热模式
+15. 副驾座椅加热模式
+16. 氛围灯
+17. 主驾空调温度
+18. 副驾空调温度
+19. 播放音乐
+20. 设置空调风速
+21. 主驾座椅自动通风加热
+22. 副驾座椅自动通风加热
+23. 关闭主驾座椅加热模式
+24. 关闭副驾座椅加热模式
+25. 模糊场景
+26. 空气净化器
+27. 同步模式
+28. 空调控制
+29. 方向盘加热
+30. 主驾出风口
+31. 副驾出风口
+32. 空气循环模式
+33. 打开导航
+34. 雨刷设置
+35. 车外灯
+36. 空调制热模式
+37. 自动调温模式
 
 举例：
 用户指令{instruction}：
@@ -730,10 +776,10 @@ select_scene_prompt = """
 返回： 模糊场景
 
 打开主驾车窗
-返回： 主驾车窗
+返回： 车窗场景
 
 关闭副驾车窗
-返回： 副驾车窗
+返回： 车窗场景
 
 打开主驾驶座椅按摩
 返回： 主驾座椅按摩

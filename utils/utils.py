@@ -49,7 +49,7 @@ def match_fuzzy_instruction(instruction, instructions):
         vectorize = CountVectorizer()
         vectors = vectorize.fit_transform([instruction, inst])
         similarity_score = cosine_similarity(vectors)[0][1]
-        if similarity_score >= temp:
+        if similarity_score > temp:
             returntext = inst
             similarity_score = temp
     return returntext
@@ -76,6 +76,27 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             else:
                 value = json_params_config.get("args")[1]["value"]
             response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False
+    elif label == '车窗场景':
+        if Status[label]['state'] == json_params_config['args'][1]['value']:
+            valuetype = json_params_config.get('args')[0]['type']
+            print(json_params_config)
+            if 'WindowAreaID' in scenario:
+                print (scenario["WindowAreaID"])
+            response_sentence = scenario['responseOpen'].format(scenario['WindowAreaID'][valuetype])
+            print (response_sentence)
+            return response_sentence, True
+        else:
+            value = ''
+            valuetype = ''
+            if len(json_params_list) == 3:
+                value = json_params_config.get("args")[0]["value"]
+                valuetype = json_params_config.get('args')[0]['type']
+            else:
+                value = json_params_config.get("args")[1]["value"]
+                valuetype = json_params_config.get('args')[0]['type']
+            # 0可以随机给
+            response_sentence = scenario.get("response")[0].format(scenario[value], scenario['WindowAreaID'][valuetype])
             return response_sentence, False
     else:
         value = ''
