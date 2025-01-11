@@ -28,16 +28,12 @@ from scenecombo.climEVheatermode import *
 
 scenario_config_all = {
     '车窗场景': window_scene_obj,
-    '主驾座椅': lfchair,
-    '副驾座椅': rlchair,
-    '主驾车门': lfdoor,
-    '副驾车门': rfdoor,
+    '座椅场景': chair_obj,
+    '车门场景': door_obj,
     '左侧后视镜': left_mirror,
     '右侧后视镜': right_mirror,
     '前排调光玻璃': front_dimmingglass,
     '后排调光玻璃': rear_dimmingglass,
-    '主驾座椅按摩': left_massage,
-    '副驾座椅按摩': right_massage, 
     '主驾座椅通风模式': left_ventilation,
     '副驾座椅通风模式': right_ventilation,     
     '主驾座椅加热模式': left_seatheat,

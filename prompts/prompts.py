@@ -158,6 +158,26 @@ right_door = """
 #setLockState, DoorID, 0x02, LockState, 0x02#
 """
 
+door_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+打开主驾车门
+#setLockState, DoorID, 0x01, LockState, 0x01#
+
+关闭主驾车门
+#setLockState, DoorID, 0x01, LockState, 0x02#
+
+打开副驾车门
+#setLockState, DoorID, 0x02, LockState, 0x01#
+
+关闭副驾车门
+#setLockState, DoorID, 0x02, LockState, 0x02#
+"""
+
 left_front_mirror = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -236,6 +256,62 @@ right_front_chair = """
 
 副驾座椅靠背往后调节
 #setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x06#
+"""
+
+chair_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+主驾座椅往前调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x01#
+
+主驾座椅往后调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x02#
+
+主驾座椅往上调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x03#
+
+主驾座椅往下调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x04#
+
+主驾座椅靠背往前调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x05#
+
+主驾座椅靠背往后调节
+#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x06#
+
+副驾座椅往前调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x01#
+
+副驾座椅往后调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x02#
+
+副驾座椅往上调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x03#
+
+副驾座椅往下调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x04#
+
+副驾座椅靠背往前调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x05#
+
+副驾座椅靠背往后调节
+#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x06#
+
+打开主驾座椅按摩
+#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x01#
+
+关闭主驾座椅按摩
+#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x00#
+
+打开副驾座椅按摩
+#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x01#
+
+关闭副驾座椅按摩
+#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x00#
 """
 
 frontdimmingglass = """
@@ -714,57 +790,47 @@ select_scene_prompt = """
 
 所有场景：
 1. 车窗场景      
-2. 主驾座椅
-3. 副驾座椅
-4. 主驾车门
-5. 副驾车门
-6. 左侧后视镜
-7. 右侧后视镜
-8. 前排调光玻璃
-9. 后排调光玻璃
-10. 主驾座椅按摩
-11. 副驾座椅按摩
-12. 主驾座椅通风模式
-13. 副驾座椅通风模式   
-14. 主驾座椅加热模式
-15. 副驾座椅加热模式
-16. 氛围灯
-17. 主驾空调温度
-18. 副驾空调温度
-19. 播放音乐
-20. 设置空调风速
-21. 主驾座椅自动通风加热
-22. 副驾座椅自动通风加热
-23. 关闭主驾座椅加热模式
-24. 关闭副驾座椅加热模式
-25. 模糊场景
-26. 空气净化器
-27. 同步模式
-28. 空调控制
-29. 方向盘加热
-30. 主驾出风口
-31. 副驾出风口
-32. 空气循环模式
-33. 打开导航
-34. 雨刷设置
-35. 车外灯
-36. 空调制热模式
-37. 自动调温模式
+2. 座椅场景
+3. 车门场景
+4. 左侧后视镜
+5. 右侧后视镜
+6. 前排调光玻璃
+7. 后排调光玻璃
+8. 主驾座椅通风模式
+9. 副驾座椅通风模式   
+10. 主驾座椅加热模式
+11. 副驾座椅加热模式
+12. 氛围灯
+13. 主驾空调温度
+14. 副驾空调温度
+15. 播放音乐
+16. 设置空调风速
+17. 主驾座椅自动通风加热
+18. 副驾座椅自动通风加热
+19. 关闭主驾座椅加热模式
+20. 关闭副驾座椅加热模式
+21. 模糊场景
+22. 空气净化器
+23. 同步模式
+24. 空调控制
+25. 方向盘加热
+26. 主驾出风口
+27. 副驾出风口
+28. 空气循环模式
+29. 打开导航
+30. 雨刷设置
+31. 车外灯
+32. 空调制热模式
+33. 自动调温模式
 
 举例：
 用户指令{instruction}：
 
 打开主驾车门
-返回： 主驾车门
-
-关闭主驾车门
-返回： 主驾车门
-
-打开副驾车门
-返回： 副驾车门
+返回： 车门场景
 
 关闭副驾车门
-返回： 副驾车门
+返回： 车门场景
 
 我累了
 返回： 模糊场景
@@ -782,7 +848,7 @@ select_scene_prompt = """
 返回： 车窗场景
 
 打开主驾驶座椅按摩
-返回： 主驾座椅按摩
+返回： 座椅场景
 
 关闭前排调光玻璃
 返回： 前排调光玻璃
