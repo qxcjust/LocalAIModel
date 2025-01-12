@@ -206,6 +206,26 @@ right_front_mirror = """
 #setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02#
 """
 
+mirror_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+展开左后视镜
+#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01#
+
+折叠左后视镜
+#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x02#
+
+展开右后视镜
+#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x01#
+
+折叠右后视镜
+#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02#
+"""
+
 left_front_chair = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -342,6 +362,30 @@ reardimmingglass = """
 后排调光玻璃调亮
 #setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b#
 """
+
+dimmingglass_prompt = """
+请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+不要任何额外内容
+
+举例：
+用户指令{instruction}: 
+
+0x0b: 调暗
+0x1b: 调亮
+
+前排调光玻璃调暗
+#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x0b#
+
+前排调光玻璃调亮
+#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x1b#
+
+后排调光玻璃调暗
+#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x0b#
+
+后排调光玻璃调亮
+#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b#
+"""
+
 
 flmassage = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
@@ -788,40 +832,41 @@ select_scene_prompt = """
 你的任务是做文本分类，将用户指令{instruction}分发到对应的场景上，返回场景名称。
 不要任何额外内容
 
+注意：
+座椅按摩为座椅场景内容，不是座椅加热场景
+
 所有场景：
 1. 车窗场景      
 2. 座椅场景
 3. 车门场景
-4. 左侧后视镜
-5. 右侧后视镜
-6. 前排调光玻璃
-7. 后排调光玻璃
-8. 主驾座椅通风模式
-9. 副驾座椅通风模式   
-10. 主驾座椅加热模式
-11. 副驾座椅加热模式
-12. 氛围灯
-13. 主驾空调温度
-14. 副驾空调温度
-15. 播放音乐
-16. 设置空调风速
-17. 主驾座椅自动通风加热
-18. 副驾座椅自动通风加热
-19. 关闭主驾座椅加热模式
-20. 关闭副驾座椅加热模式
-21. 模糊场景
-22. 空气净化器
-23. 同步模式
-24. 空调控制
-25. 方向盘加热
-26. 主驾出风口
-27. 副驾出风口
-28. 空气循环模式
-29. 打开导航
-30. 雨刷设置
-31. 车外灯
-32. 空调制热模式
-33. 自动调温模式
+4. 后视镜场景
+5. 调光玻璃场景
+6. 主驾座椅通风模式
+7. 副驾座椅通风模式   
+8. 主驾座椅加热模式
+9. 副驾座椅加热模式
+10. 氛围灯
+11. 主驾空调温度
+12. 副驾空调温度
+13. 播放音乐
+14. 设置空调风速
+15. 主驾座椅自动通风加热
+16. 副驾座椅自动通风加热
+17. 关闭主驾座椅加热模式
+18. 关闭副驾座椅加热模式
+19. 模糊场景
+20. 空气净化器
+21. 同步模式
+22. 空调控制
+23. 方向盘加热
+24. 主驾出风口
+25. 副驾出风口
+26. 空气循环模式
+27. 打开导航
+28. 雨刷设置
+29. 车外灯
+30. 空调制热模式
+31. 自动调温模式
 
 举例：
 用户指令{instruction}：
@@ -847,17 +892,20 @@ select_scene_prompt = """
 关闭副驾车窗
 返回： 车窗场景
 
+打开副驾座椅按摩
+返回： 座椅场景
+
 打开主驾驶座椅按摩
 返回： 座椅场景
 
-关闭前排调光玻璃
-返回： 前排调光玻璃
+调亮前排调光玻璃
+返回： 调光玻璃场景
+
+调暗后排调光玻璃
+返回： 调光玻璃场景
 
 设置副驾座椅通风模式3档
 返回： 副驾座椅通风模式
-
-打开副驾座椅按摩
-返回： 副驾座椅按摩
 
 打开副驾座椅加热模式3档 | 关闭副驾座椅加热模式
 返回： 副驾座椅加热
@@ -866,10 +914,10 @@ select_scene_prompt = """
 返回： 主驾空调温度
 
 展开左后视镜
-返回： 左后视镜
+返回： 后视镜场景
 
 展开右后视镜
-返回： 右后视镜
+返回： 后视镜场景
 
 播放舒缓音乐
 返回： 播放音乐

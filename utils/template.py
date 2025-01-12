@@ -13,7 +13,6 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
     mirrorctrl = f"val://Vehicle/static/LSMirrorCtrl/setMirrorFoldStaus/{name}"
     navigation = f"val://Vehicle/static/LauncherService/LauncherNavigation/{name}"
     music = f"val://Vehicle/static/LauncherService/LauncherMusic/{name}"
-    massage = f"val://Vehicle/static/LSSeatCtrl/setSeatMassageMode/{name}"
     wiper = f"val://Vehicle/static/LSWiperWasherCtrl/setFrontWiperMode/{name}"
     beam = f"val://Vehicle/static/LSExteriorLightCtrl/{name}"
     climEVheatermode = f"val://Vehicle/static/LSClimateCtrl/setClimEVHeaterMode/{name}"
@@ -24,16 +23,14 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
     chairctrl = f"val://Vehicle/static/LSSeatCtrl/{name}"
     
     name = ""
-    if label == "主驾车窗" or label == "副驾车窗" or label == "左后车窗" or label == "右后车窗" or label == "所有车窗":
+    if label == "车窗场景":
         name = windowctrl
-    elif label == '主驾车门' or label == '副驾车门':
+    elif label == '车门场景':
         name = doorctrl
-    elif label == "主驾驶座椅" or label == "副驾驶座椅":
-        name = doorctrl
-    elif label == "左侧后视镜" or label == "右侧后视镜":
-        name = mirrorctrl
-    elif label == "主驾驶座椅" or label == "副驾驶座椅":
+    elif label == "座椅场景":
         name = chairctrl
+    elif label == "后视镜场景":
+        name = mirrorctrl
     elif label == '氛围灯':
         name = ambientctrl
     elif label == '空气净化器':
@@ -44,14 +41,12 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = acmodectrl
     elif label == '方向盘加热':
         name = heatedsteeringwheelmode
-    elif label == '前排调光玻璃' or label =='后排调光玻璃':
+    elif label == '调光玻璃场景':
         name = DimmingGlass
     elif label == '打开导航':
         name = navigation
     elif label == '播放音乐':
         name = music
-    elif label == '主驾座椅按摩' or label == '副驾座椅按摩':
-        name = massage
     elif label == '雨刷设置':
         name = wiper
     elif label == '车外灯':

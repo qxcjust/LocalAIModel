@@ -66,12 +66,13 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
         return response_sentence, False
     elif label == "车门场景":
         if Status[label]['state'] == json_params_config['args'][1]['value']:
+            valuetype = json_params_config.get('args')[0]['value']
             response_sentence = scenario['responseOpen'].format(scenario['DoorID'][valuetype])
             return response_sentence, True
         else:
             value = json_params_config.get("args")[1]["value"]
             valuetype = json_params_config.get('args')[0]['value']
-            response_sentence = scenario.get("response")[0].format(scenario[value], scenario['DoorID'][valuetype])
+            response_sentence = scenario.get("response")[0].format(scenario['DoorID'][value], scenario['DoorID'][valuetype])
             return response_sentence, False
     elif label == '车窗场景':
         if Status[label]['state'] == json_params_config['args'][1]['value']:
@@ -93,7 +94,7 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
     elif label == '座椅场景':
         if Status[label]['state'] == json_params_config['args'][1]['value']:
             valuetype = json_params_config.get('args')[0]['value']
-            response_sentence = scenario['responseOpen'].format(scenario['WindowAreaID'][valuetype])
+            response_sentence = scenario['responseOpen'].format(scenario['chairmassage'][valuetype])
             return response_sentence, True
         else:
             if name == "setSeatMassageMode":
@@ -104,6 +105,28 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
                 value = json_params_config.get("args")[1]["value"]
                 valuetype = json_params_config.get('args')[0]['value']
                 response_sentence = scenario.get("response")[0].format(scenario['chairadjust'][value], scenario['chairadjust']['SeatID'][valuetype])
+            return response_sentence, False
+    elif label == '后视镜场景':
+        if Status[label]['state'] == json_params_config['args'][1]['value']:
+            valuetype = json_params_config.get('args')[0]['value']
+            value = json_params_config.get('args')[1]['value']
+            response_sentence = scenario['responseOpen'].format(scenario['MirrorID'][valuetype], scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[1]["value"]
+            valuetype = json_params_config.get('args')[0]['value']
+            response_sentence = scenario.get("response")[0].format(scenario[value], scenario['MirrorID'][valuetype])
+            return response_sentence, False
+    elif label == '调光玻璃场景':
+        if Status[label]['state'] == json_params_config['args'][1]['value']:
+            valuetype = json_params_config.get('args')[0]['value']
+            value = json_params_config.get('args')[1]['value']
+            response_sentence = scenario['responseOpen'].format(scenario['GlassID'][valuetype], scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[1]["value"]
+            valuetype = json_params_config.get('args')[0]['value']
+            response_sentence = scenario.get("response")[0].format(scenario[value], scenario['GlassID'][valuetype])
             return response_sentence, False
     else:
         value = ''
