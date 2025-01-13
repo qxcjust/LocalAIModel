@@ -221,8 +221,13 @@ CleanMode: 0x01(打开), 0x02(关闭)
 #setClimatCleaness, CleanMode, 0x01#
 """
 
+navigation_prompt = """
+提取{instruction}导航参数，不要任何额外内容
 
-
+示例：
+打开导航
+#LauncherNavigation, address, 0x07#
+""" 
 
 flmassage = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
@@ -502,17 +507,6 @@ climcirculationmode_prompt = """
 
 设置空气循环模式为外循环
 #setInCirculationMode, CycleState, 0x02#
-""" 
-
-navigation_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开导航
-#LauncherNavigation, address, 0x07#
 """ 
 
 frontwipermode_prompt = """

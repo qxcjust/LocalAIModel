@@ -36,6 +36,7 @@ scenario_config_all = {
     '播放音乐场景': musicctrl,
     '方向盘加热场景': heatedsteeringwheelmode,   
     '空气净化器场景': climatcleaness,   
+    '导航场景': navigation,
 
     '主驾座椅通风模式': left_ventilation,
     '副驾座椅通风模式': right_ventilation,     
@@ -54,7 +55,6 @@ scenario_config_all = {
     '主驾出风口': climleftventdirection,
     '副驾出风口': climrightventdirection,
     '空气循环模式': climcirculationmode,
-    '打开导航': navigation,
     '雨刷设置': frontwipermode,
     '车外灯': highbeam,
     '空调制热模式': climEVheatermode,

@@ -31,17 +31,17 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = chairctrl
     elif label == "后视镜场景":
         name = mirrorctrl
-    elif label == '氛围灯場景':
+    elif label == '氛围灯场景':
         name = ambientctrl
-    elif label == '空气净化器場景':
+    elif label == '空气净化器场景':
         name = climatecleaness
-    elif label == '方向盘加热場景':
+    elif label == '方向盘加热场景':
         name = heatedsteeringwheelmode
     elif label == '调光玻璃场景':
         name = DimmingGlass
-    elif label == '播放音乐場景':
+    elif label == '播放音乐场景':
         name = music
-    elif label == '打开导航':
+    elif label == '导航场景':
         name = navigation
     elif label == '同步模式':
         name = climatsyncmode

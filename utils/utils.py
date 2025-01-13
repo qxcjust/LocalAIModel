@@ -163,8 +163,8 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
         else:
             value = json_params_config.get("args")[0]["value"]
             response_sentence = scenario.get("response")[0].format(scenario[value])
-            return response_sentence, False                
-    else:
+            return response_sentence, False       
+    else: # 导航场景，
         value = ''
         if len(json_params_list) == 3:
             value = json_params_config.get("args")[0]["value"]
