@@ -1,121 +1,31 @@
-front_left_window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开左侧车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
-
-打开主驾车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
-
-关闭主驾驶车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15#
-
-打开左前车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
-"""
-
-rear_left_window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开左后车窗
-#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01#
-
-关闭左后车窗
-#setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15#
-"""
-
-front_right_window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开右侧车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
-
-打开副驾车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
-
-关闭副驾驶车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15#
-
-打开右前车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
-"""
-
-rear_right_window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开右后车窗
-#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01#
-
-关闭右后车窗
-#setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x15#
-"""
-
-all_window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开全部车窗
-#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x01#
-
-关闭全部车窗
-#setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15#
-"""
-
 window_scene = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+请将用户指令{instruction}提取关键信息,返回关键参数。
+不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
+关键参数说明:
+- WindowAreaID: 0x01(主驾/左前), 0x02(副驾/右前), 0x03(左后), 0x04(右后), 0x05(全部)
+- WindowPosition: 0x01(打开), 0x15(关闭)
 
-打开左侧车窗
+举例:
+用户指令{instruction}:
+
+打开主驾车窗/左前车窗
 #setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
 
-打开主驾车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
-
-关闭主驾驶车窗
+关闭主驾车窗
 #setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x15#
 
-打开左前车窗
-#setWindowPosition, WindowAreaID, 0x01, WindowPosition, 0x01#
+打开副驾车窗/右前车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
+
+关闭副驾车窗
+#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15#
 
 打开左后车窗
 #setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x01#
 
 关闭左后车窗
 #setWindowPosition, WindowAreaID, 0x03, WindowPosition, 0x15#
-
-打开右侧车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
-
-打开副驾车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
-
-关闭副驾驶车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x15#
-
-打开右前车窗
-#setWindowPosition, WindowAreaID, 0x02, WindowPosition, 0x01#
 
 打开右后车窗
 #setWindowPosition, WindowAreaID, 0x04, WindowPosition, 0x01#
@@ -128,38 +38,13 @@ window_scene = """
 
 关闭全部车窗
 #setWindowPosition, WindowAreaID, 0x05, WindowPosition, 0x15#
-"""
-
-left_door = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开主驾车门
-#setLockState, DoorID, 0x01, LockState, 0x01#
-
-关闭主驾车门
-#setLockState, DoorID, 0x01, LockState, 0x02#
-"""
-
-right_door = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开副驾车门
-#setLockState, DoorID, 0x02, LockState, 0x01#
-
-关闭副驾车门
-#setLockState, DoorID, 0x02, LockState, 0x02#
 """
 
 door_prompt = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
+确保DoorID和LockState的正确性：
+- 主驾车门的DoorID为0x01，副驾车门的DoorID为0x02。
+- 打开车门时LockState的值为0x01，关闭车门时LockState的值为0x02。
 不要任何额外内容
 
 举例：
@@ -614,18 +499,19 @@ ambientlight_prompts = """
 """
 
 climatcleaness_prompts = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+解析用户指令{instruction}并返回关键参数。
+- 关闭空气净化器时，CleanMode应为0x01。
+- 打开空气净化器时，CleanMode应为0x02。
 
-举例：
-用户指令{instruction}: 
+示例：
+{instruction}: 
 
 打开PM2.5空气净化器 | 打开空气净化器
 #setClimatCleaness, CleanMode, 0x02#
 
 关闭PM2.5空气净化器 | 关闭空气净化器
 #setClimatCleaness, CleanMode, 0x01#
-""" 
+"""
 
 climatsyncmode_prompts = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。

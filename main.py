@@ -39,7 +39,8 @@ def generate_single_scenario(instruction, prompts):
         template=prompts,
         input_variables=["query"]
     )
-    logging.info(f"generate_single_scenario: {instruction} prompts:{prompts}")
+    #logging.info(f"generate_single_scenario: {instruction} prompts:{prompts}")
+    logging.info(f"generate_single_scenario: {instruction}")
     chain = prompt | llm_generate | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction})
     logging.info (scenario)
@@ -70,8 +71,9 @@ async def process_instruction(input: InstructionInput):
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
     #scenario = scenario_config_all[label]
+    logging.info(f"get_closest_match before : {label}")
     scenario = get_closest_match(label, scenario_config_all)
-    logging.info(f"场景决策: {label}")
+    logging.info(f"场景决策 get_closest_match after: {label}")
     end1 = time.time()
     logging.info(f"场景决策 Execution time: {end1 - start} seconds")
 
