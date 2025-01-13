@@ -20,9 +20,7 @@ from scenecombo.ventdirection import *
 from scenecombo.circulationmode import *
 from scenecombo.navigation import *
 from scenecombo.frontwipermode import *
-from scenecombo.lowbeam import *
-from scenecombo.highbeam import *
-from scenecombo.positionbeam import *
+from scenecombo.externalLight import *
 from scenecombo.climAutoNormalMode import *
 from scenecombo.climEVheatermode import *
 
@@ -37,7 +35,8 @@ scenario_config_all = {
     '方向盘加热场景': heatedsteeringwheelmode,   
     '空气净化器场景': climatcleaness,   
     '导航场景': navigation,
-
+    '雨刷场景': frontwipermode,
+    '车外灯场景': externalLight,
     '主驾座椅通风模式': left_ventilation,
     '副驾座椅通风模式': right_ventilation,     
     '主驾座椅加热模式': left_seatheat,
@@ -51,13 +50,11 @@ scenario_config_all = {
     '副驾座椅自动通风加热': right_Seatautomode,
     '同步模式': climatsyncmode,
     '空调控制': acmodectrl,
-    '模糊场景': FuzzyInstruction,
     '主驾出风口': climleftventdirection,
     '副驾出风口': climrightventdirection,
     '空气循环模式': climcirculationmode,
-    '雨刷设置': frontwipermode,
-    '车外灯': highbeam,
     '空调制热模式': climEVheatermode,
-    '自动调温模式': climAutoNormalMode
+    '自动调温模式': climAutoNormalMode,
+    '模糊场景': FuzzyInstruction
 }
 

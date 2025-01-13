@@ -1,7 +1,7 @@
 from prompts.prompts import *
 
-highbeam = {
-    "prompts": beam_prompt,
+externalLight = {
+    "prompts": externalLight_prompt,
     "response": [
         "好的，{}已{}",
     ],
@@ -11,5 +11,6 @@ highbeam = {
 
     'setHighBeamStatus': '远光灯',
     'setLowBeamStatus': '近光灯',
-    'setPositionLampStatus': '位置灯'
+    'setPositionLampStatus': '位置灯',
+    'responseOpen': "{}已经{}",
 }

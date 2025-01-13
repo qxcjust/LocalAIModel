@@ -229,6 +229,40 @@ navigation_prompt = """
 #LauncherNavigation, address, 0x07#
 """ 
 
+frontwipermode_prompt = """
+提取{instruction}雨刷参数, 不要任何额外内容
+FrontWiperMode参数对应:
+- 0x00: 关闭
+- 0x01: 间歇摆动
+- 0x02: 单次摆动
+- 0x03: 高速摆动
+- 0x04: 低速摆动
+
+示例：
+雨刷低速摆动
+#setFrontWiperMode, FrontWiperMode, 0x04#
+
+关闭雨刷
+#setFrontWiperMode, FrontWiperMode, 0x00#
+""" 
+
+externalLight_prompt = """
+提取{instruction}车外灯控制参数，不要任何额外内容
+- 位置灯: setPositionLampStatus, PositionlampStatus, 0x01(开)/0x00(关)
+- 远光灯: setHighBeamStatus, lampStatus, 0x01(开)/0x00(关)  
+- 近光灯/小灯: setLowBeamStatus, lampStatus, 0x01(开)/0x00(关)
+
+示例:
+打开位置灯
+#setPositionLampStatus, PositionlampStatus, 0x01#
+
+关闭远光灯  
+#setHighBeamStatus, lampStatus, 0x00#
+
+打开近光灯
+#setLowBeamStatus, lampStatus, 0x01#
+"""
+
 flmassage = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -507,54 +541,6 @@ climcirculationmode_prompt = """
 
 设置空气循环模式为外循环
 #setInCirculationMode, CycleState, 0x02#
-""" 
-
-frontwipermode_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-0x04: 低速摆动, 0x03: 高速摆动, 0x02:单次摆动, 0x01:间歇摆动
-雨刷低速摆动
-#setFrontWiperMode, FrontWiperMode, 0x04#
-
-关闭雨刷
-#setFrontWiperMode, FrontWiperMode, 0x00#
-""" 
-
-
-beam_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开位置灯
-#setPositionLampStatus, PositionlampStatus, 0x01#
-
-关闭位置灯
-#setPositionLampStatus, PositionlampStatus, 0x00#
-
-打开远光灯
-#setHighBeamStatus, lampStatus, 0x01#
-
-关闭远光灯
-#setHighBeamStatus, lampStatus, 0x00#
-
-打开近光灯
-#setLowBeamStatus, lampStatus, 0x01#
-
-打开小灯
-#setLowBeamStatus, lampStatus, 0x01#
-
-关闭近光灯
-#setLowBeamStatus, lampStatus, 0x00#
-
-关闭小灯
-#setLowBeamStatus, lampStatus, 0x00#
 """ 
 
 climEVheatermode_prompt = """

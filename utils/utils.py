@@ -164,6 +164,24 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             value = json_params_config.get("args")[0]["value"]
             response_sentence = scenario.get("response")[0].format(scenario[value])
             return response_sentence, False       
+    elif label == '雨刷场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False      
+    elif label == '车外灯场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False                    
     else: # 导航场景，
         value = ''
         if len(json_params_list) == 3:

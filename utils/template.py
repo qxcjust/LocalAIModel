@@ -14,7 +14,7 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
     navigation = f"val://Vehicle/static/LauncherService/LauncherNavigation/{name}"
     music = f"val://Vehicle/static/LauncherService/LauncherMusic/{name}"
     wiper = f"val://Vehicle/static/LSWiperWasherCtrl/setFrontWiperMode/{name}"
-    beam = f"val://Vehicle/static/LSExteriorLightCtrl/{name}"
+    externalLight = f"val://Vehicle/static/LSExteriorLightCtrl/{name}"
     climEVheatermode = f"val://Vehicle/static/LSClimateCtrl/setClimEVHeaterMode/{name}"
     circulationMode = f"val://Vehicle/static/LSClimateCtrl/setInCirculationMode/{name}"
     climFanSpeed = f"val://Vehicle/static/LSClimateCtrl/setClimFanSpeed/{name}"
@@ -43,14 +43,14 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = music
     elif label == '导航场景':
         name = navigation
+    elif label == '雨刷场景':
+        name = wiper
+    elif label == '车外灯场景':
+        name = externalLight
     elif label == '同步模式':
         name = climatsyncmode
     elif label == '空调控制':
         name = acmodectrl
-    elif label == '雨刷设置':
-        name = wiper
-    elif label == '车外灯':
-        name = beam
     elif label == '空调制热模式':
         name = climEVheatermode
     elif label == '空气循环模式':
