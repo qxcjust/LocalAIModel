@@ -8,5 +8,6 @@ heatedsteeringwheelmode = {
     ],
 
     "0x01": "打开",
-    "0x00": "关闭"
+    "0x00": "关闭",
+    "responseOpen": "好的，方向盘加热已为{}"
 }

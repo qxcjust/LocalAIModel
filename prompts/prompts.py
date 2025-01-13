@@ -41,14 +41,15 @@ window_scene = """
 """
 
 door_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-确保DoorID和LockState的正确性：
-- 主驾车门的DoorID为0x01，副驾车门的DoorID为0x02。
-- 打开车门时LockState的值为0x01，关闭车门时LockState的值为0x02。
-不要任何额外内容
+请将用户指令{instruction}提取关键信息,返回关键参数。
+不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
+关键参数说明:
+- DoorID: 0x01(主驾), 0x02(副驾)
+- LockState: 0x01(打开), 0x02(关闭)
+
+举例:
+用户指令{instruction}:
 
 打开主驾车门
 #setLockState, DoorID, 0x01, LockState, 0x01#
@@ -63,41 +64,15 @@ door_prompt = """
 #setLockState, DoorID, 0x02, LockState, 0x02#
 """
 
-left_front_mirror = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-展开左后视镜
-#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01#
-
-折叠左后视镜
-#setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x02#
-"""
-
-right_front_mirror = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-展开右后视镜
-#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x01#
-
-折叠右后视镜
-#setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02#
-"""
-
 mirror_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+提取{instruction}中的关键信息,返回关键参数。
+不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
+关键参数说明:
+- MirrorID: 0x01(左后视镜), 0x02(右后视镜)
+- MirrorFoldStaus: 0x01(展开), 0x02(折叠)
 
+示例:
 展开左后视镜
 #setMirrorFoldStaus, MirrorID, 0x01, MirrorFoldStaus, 0x01#
 
@@ -109,67 +84,18 @@ mirror_prompt = """
 
 折叠右后视镜
 #setMirrorFoldStaus, MirrorID, 0x02, MirrorFoldStaus, 0x02#
-"""
-
-left_front_chair = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-主驾座椅往前调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x01#
-
-主驾座椅往后调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x02#
-
-主驾座椅往上调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x03#
-
-主驾座椅往下调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x04#
-
-主驾座椅靠背往前调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x05#
-
-主驾座椅靠背往后调节
-#setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x06#
-"""
-
-right_front_chair = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-副驾座椅往前调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x01#
-
-副驾座椅往后调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x02#
-
-副驾座椅往上调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x03#
-
-副驾座椅往下调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x04#
-
-副驾座椅靠背往前调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x05#
-
-副驾座椅靠背往后调节
-#setSeatForwardBackAdj, SeatID, 0x02, Direction, 0x06#
 """
 
 chair_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+提取{instruction}中的座椅控制参数,返回关键参数。
+不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
+参数说明:
+- SeatID: 0x01(主驾), 0x02(副驾)
+- Direction: 0x01(前), 0x02(后), 0x03(上), 0x04(下), 0x05(靠背前), 0x06(靠背后)
+- MassageMode: 0x01(开), 0x00(关)
 
+示例:
 主驾座椅往前调节
 #setSeatForwardBackAdj, SeatID, 0x01, Direction, 0x01#
 
@@ -219,57 +145,83 @@ chair_prompt = """
 #setSeatMassageMode, SeatID, 0x02, MassageMode, 0x00#
 """
 
-frontdimmingglass = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-前排调光玻璃调暗
-#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x0b#
-
-前排调光玻璃调亮
-#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x1b#
-"""
-
-
-reardimmingglass = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-后排调光玻璃调暗
-#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x0b#
-
-后排调光玻璃调亮
-#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b#
-"""
-
 dimmingglass_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+提取{instruction}中调光玻璃参数:
+GlassID: 0x00(前排), 0x01(后排)
+DimmingStatus: 0x0b(调暗), 0x1b(调亮)
+不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
-
-0x0b: 调暗
-0x1b: 调亮
-
-前排调光玻璃调暗
+示例:
+调暗前排调光玻璃
 #setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x0b#
 
-前排调光玻璃调亮
-#setDimmingGlassStatus, GlassID, 0x00, DimmingStatus, 0x1b#
-
-后排调光玻璃调暗
-#setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x0b#
-
-后排调光玻璃调亮
+调亮后排调光玻璃 
 #setDimmingGlassStatus, GlassID, 0x01, DimmingStatus, 0x1b#
 """
+
+ambientlight_prompts = """
+解析用户指令{instruction}并返回氛围灯参数，不要任何额外内容
+Color参数对应:
+- 0x01: 关闭
+- 0x02: 红色
+- 0x03: 黄色
+- 0x04: 橙色
+- 0x05: 蓝色
+- 0x0c: 闪烁模式
+- 0x0d: 呼吸模式
+
+示例:
+关闭氛围灯
+#setAmbientLightColor, Color, 0x01#
+
+设置氛围灯颜色为红色
+#setAmbientLightColor, Color, 0x02#
+
+设置氛围灯闪烁模式
+#setAmbientLightColor, Color, 0x0c#
+
+设置氛围灯呼吸模式
+#setAmbientLightColor, Color, 0x0d#
+"""
+
+musicctrl_prompt = """
+提取{instruction}音乐参数，不要任何额外内容
+MusicId: 0x00(停止), 0x01(舒缓), 0x02(歌剧), 0x03(钢琴), 0x04(流行), 0x05(小提琴)
+MusicType: 0x01
+
+示例:
+停止音乐
+#LauncherMusic, MusicId, 0x00, MusicType, 0x01#
+
+播放舒缓音乐
+#LauncherMusic, MusicId, 0x01, MusicType, 0x01#
+"""
+
+heatedsteeringwheelmode_prompts = """
+提取{instruction}方向盘加热参数，不要任何额外内容
+SWStatus: 0x01(打开), 0x00(关闭)
+
+示例:
+打开方向盘加热
+#setClimHeatedSteeringWheelMode, SWStatus, 0x01#
+
+关闭方向盘加热
+#setClimHeatedSteeringWheelMode, SWStatus, 0x00#
+"""
+
+climatcleaness_prompts = """
+提取{instruction}空气净化器参数，不要任何额外内容
+CleanMode: 0x01(打开), 0x02(关闭)
+
+示例：
+打开PM2.5空气净化器
+#setClimatCleaness, CleanMode, 0x02#
+
+关闭PM2.5空气净化器
+#setClimatCleaness, CleanMode, 0x01#
+"""
+
+
 
 
 flmassage = """
@@ -419,20 +371,7 @@ frACTempControl = """
 设置设置副驾空调温度32度
 #setACTempControl, AreaID, 0x02, Temp, 32#
 """
-musicctrl_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
 
-举例：
-用户指令{instruction}: 
-
-停止音乐
-#LauncherMusic, MusicId, 0x00, MusicType, 0x01#
-
-0x01:舒缓音乐, 0x02:歌剧音乐, 0x03:钢琴曲, 0x04:流行音乐, 0x05:小提琴音乐
-播放舒缓音乐
-#LauncherMusic, MusicId, 0x01, MusicType, 0x01#
-"""
 
 climate_fanspeed = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
@@ -477,42 +416,6 @@ frSeatautomode = """
 #setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00#
 """
 
-ambientlight_prompts = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-关闭氛围灯
-#setAmbientLightColor, Color, 0x01#
-
-0x02, 黄色: 0x03, 橙色: 0x04, 蓝色: 0x05
-设置氛围灯颜色为红色
-#setAmbientLightColor, Color, 0x02#
-
-设置氛围灯闪烁模式
-#setAmbientLightColor, Color, 0x0c#
-
-设置氛围灯呼吸模式
-#setAmbientLightColor, Color, 0x0d#
-"""
-
-climatcleaness_prompts = """
-解析用户指令{instruction}并返回关键参数。
-- 关闭空气净化器时，CleanMode应为0x01。
-- 打开空气净化器时，CleanMode应为0x02。
-
-示例：
-{instruction}: 
-
-打开PM2.5空气净化器 | 打开空气净化器
-#setClimatCleaness, CleanMode, 0x02#
-
-关闭PM2.5空气净化器 | 关闭空气净化器
-#setClimatCleaness, CleanMode, 0x01#
-"""
-
 climatsyncmode_prompts = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
@@ -545,20 +448,6 @@ acmodectrl_prompts = """
 
 关闭空调
 #setACModeControl, SWStatus, 0x00#
-""" 
-
-heatedsteeringwheelmode_prompts = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开方向盘加热
-#setClimHeatedSteeringWheelMode, SWStatus, 0x01#
-
-关闭方向盘加热
-#setClimHeatedSteeringWheelMode, SWStatus, 0x00#
 """ 
 
 climleftventdirection_prompt = """
@@ -714,153 +603,3 @@ fuzzy_instruction_prompt = """
 返回: 打开左车窗一半
 """
 
-select_scene_prompt = """
-你的任务是做文本分类，将用户指令{instruction}分发到对应的场景上，返回场景名称。
-不要任何额外内容
-
-注意：
-座椅按摩为座椅场景内容，不是座椅加热场景
-关闭主驾车门为车门场景，不是座椅加热场景
-
-
-所有场景：
-1. 车窗场景      
-2. 座椅场景
-3. 车门场景
-4. 后视镜场景
-5. 调光玻璃场景
-6. 主驾座椅通风模式
-7. 副驾座椅通风模式   
-8. 主驾座椅加热模式
-9. 副驾座椅加热模式
-10. 氛围灯
-11. 主驾空调温度
-12. 副驾空调温度
-13. 播放音乐
-14. 设置空调风速
-15. 主驾座椅自动通风加热
-16. 副驾座椅自动通风加热
-17. 关闭主驾座椅加热模式
-18. 关闭副驾座椅加热模式
-19. 模糊场景
-20. 空气净化器
-21. 同步模式
-22. 空调控制
-23. 方向盘加热
-24. 主驾出风口
-25. 副驾出风口
-26. 空气循环模式
-27. 打开导航
-28. 雨刷设置
-29. 车外灯
-30. 空调制热模式
-31. 自动调温模式
-
-举例：
-用户指令{instruction}：
-
-打开主驾车门
-返回： 车门场景
-
-关闭副驾车门
-返回： 车门场景
-
-我累了
-返回： 模糊场景
-
-老婆生气了
-返回： 模糊场景
-
-太冷了
-返回： 模糊场景
-
-打开主驾车窗
-返回： 车窗场景
-
-关闭副驾车窗
-返回： 车窗场景
-
-打开副驾座椅按摩
-返回： 座椅场景
-
-打开主驾驶座椅按摩
-返回： 座椅场景
-
-调亮前排调光玻璃
-返回： 调光玻璃场景
-
-调暗后排调光玻璃
-返回： 调光玻璃场景
-
-设置副驾座椅通风模式3档
-返回： 副驾座椅通风模式
-
-打开副驾座椅加热模式3档 | 关闭副驾座椅加热模式
-返回： 副驾座椅加热
-
-设置主驾空调温度22度
-返回： 主驾空调温度
-
-展开左后视镜
-返回： 后视镜场景
-
-展开右后视镜
-返回： 后视镜场景
-
-播放舒缓音乐
-返回： 播放音乐
-
-停止音乐
-返回： 播放音乐
-
-设置空调风速6档
-返回： 设置空调风速
-
-打开主驾座椅自动通风加热
-返回： 主驾座椅自动通风加热
-
-设置氛围灯颜色为红色
-返回： 氛围灯
-
-打开PM2.5空气净化器
-返回： 空气净化器
-
-启动同步模式
-返回： 同步模式
-
-打开空调 | 关闭空调
-返回： 空调控制
-
-打开方向盘加热  | 关闭方向盘加热
-返回： 方向盘加热
-
-设置主驾出风口方向为吹头
-返回： 主驾出风口
-
-设置副驾出风口方向为吹脸
-返回： 副驾出风口
-
-设置空气循环模式为内循环
-返回： 空气循环模式
-
-导航回家
-返回： 打开导航
-
-雨刷高速摆动
-返回： 雨刷设置
-
-打开近光灯 | 关闭静光灯
-返回： 车外灯
-
-打开远光灯
-返回： 车外灯
-
-打开位置灯
-返回： 车外灯
-
-打开空调调温模式
-返回： 空调调温模式
-
-打开空调制热模式
-返回： 空调制热模式
-"""

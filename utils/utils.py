@@ -56,7 +56,7 @@ def match_fuzzy_instruction(instruction, instructions):
 
 def generate_response_sentence(label, json_params_config, scenario, json_params_list, name):
     response_sentence = ""
-    if label == '车外灯':
+    if label == '车外灯场景':
         value = ''
         if len(json_params_list) == 3:
             value = json_params_config.get("args")[0]["value"]
@@ -64,7 +64,7 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             value = json_params_config.get("args")[1]["value"]
         response_sentence = scenario.get("response")[0].format(scenario[name], scenario[value])
         return response_sentence, False
-    elif label == "车门场景":
+    elif label == '车门场景':
         if Status[label]['state'] == json_params_config['args'][1]['value']:
             valuetype = json_params_config.get('args')[0]['value']
             response_sentence = scenario['responseOpen'].format(scenario['DoorID'][valuetype])
@@ -74,6 +74,15 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             valuetype = json_params_config.get('args')[0]['value']
             response_sentence = scenario.get("response")[0].format(scenario['DoorID'][value], scenario['DoorID'][valuetype])
             return response_sentence, False
+    elif label == '氛围灯场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False        
     elif label == '车窗场景':
         if Status[label]['state'] == json_params_config['args'][1]['value']:
             valuetype = json_params_config.get('args')[0]['value']
@@ -128,6 +137,33 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             valuetype = json_params_config.get('args')[0]['value']
             response_sentence = scenario.get("response")[0].format(scenario[value], scenario['GlassID'][valuetype])
             return response_sentence, False
+    elif label == '播放音乐场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False        
+    elif label == '方向盘加热场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False         
+    elif label == '空气净化器场景':
+        if Status[label]['state'] == json_params_config['args'][0]['value']:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario['responseOpen'].format(scenario[value])
+            return response_sentence, True
+        else:
+            value = json_params_config.get("args")[0]["value"]
+            response_sentence = scenario.get("response")[0].format(scenario[value])
+            return response_sentence, False                
     else:
         value = ''
         if len(json_params_list) == 3:

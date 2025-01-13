@@ -8,5 +8,6 @@ climatcleaness = {
     ],
 
     "0x02": "打开",
-    "0x01": "关闭"
+    "0x01": "关闭",
+    'responseOpen': "PM2.5空气净化器已经{}",
 }

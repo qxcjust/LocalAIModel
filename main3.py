@@ -48,7 +48,7 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
-    instruction = "关闭全部车窗"
+    instruction = "主驾按摩关闭"
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
@@ -59,7 +59,7 @@ def main():
 
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
-    scenario = scenario_config_all[label]
+    scenario = get_closest_match(label,scenario_config_all)
     # scenario = get_closest_match(label, scenario_config_all)
     logging.info(f"场景决策: {label}")
     end1 = time.time()

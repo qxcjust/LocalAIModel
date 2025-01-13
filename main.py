@@ -17,6 +17,7 @@ from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import difflib
+from prompts.scenepromptselect import select_scene_prompt
 
 app = FastAPI()
 

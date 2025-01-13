@@ -15,4 +15,5 @@ ambientlight = {
     "0x05": "蓝色",
     "0x0c": "闪烁模式",
     "0x0d": "呼吸模式",
+    'responseOpen': "氛围灯已为{}"
 }
