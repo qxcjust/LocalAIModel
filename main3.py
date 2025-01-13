@@ -48,7 +48,7 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
-    instruction = "老婆生气了"
+    instruction = "太冷了"
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
