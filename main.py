@@ -1,6 +1,6 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from base import llm
+from base import llm, llm_generate
 from prompts.prompts import *
 import time
 from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content
@@ -40,7 +40,7 @@ def generate_single_scenario(instruction, prompts):
         input_variables=["query"]
     )
     logging.info(f"generate_single_scenario: {instruction} prompts:{prompts}")
-    chain = prompt | llm | StrOutputParser()
+    chain = prompt | llm_generate | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction})
     logging.info (scenario)
     return scenario
