@@ -28,5 +28,10 @@ Status = {
     },
     '雨刷场景':{
         'state': '0x01'
+    },    
+    '车外灯场景':{
+        'lowbeam_state': '0x01',
+        'highbeam_state': '0x01',
+        'positionlamp_state': '0x01'
     }    
 }
