@@ -47,21 +47,8 @@ def rz_action_template_lf_window(name: str, args: list, label: str) -> dict:
         name = wiper
     elif label == '车外灯场景':
         name = externalLight
-    elif label == '同步模式':
-        name = climatsyncmode
-    elif label == '空调控制':
+    elif label == '空调控制场景':
         name = acmodectrl
-    elif label == '空调制热模式':
-        name = climEVheatermode
-    elif label == '空气循环模式':
-        name = circulationMode
-    elif label == '设置空调风速' or label == '关闭空调风扇':
-        name = climFanSpeed   
-    elif label == '主驾空调温度' or label == '副驾空调温度':
-        name = ACTempControl 
-    elif label == '自动调温模式':
-        name = ACAutoTemp
-
 
     rz_action_template_lf_window = {
         'name': name,

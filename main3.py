@@ -10,6 +10,7 @@ from scenecombo.summary import scenario_config_all
 from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
+from prompts.scenepromptselect import select_scene_prompt
 
 # from transformers import DistilBertForSequenceClassification, DistilBertTokenizerFast, BertForSequenceClassification, BertTokenizerFast, BertTokenizer, BertModel, pipeline
 # import torch

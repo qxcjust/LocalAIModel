@@ -263,284 +263,43 @@ externalLight_prompt = """
 #setLowBeamStatus, lampStatus, 0x01#
 """
 
-flVentilation = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
+climate_prompt = """
+提取{instruction}空调控制参数,不要任何额外内容。
 
-举例：
-用户指令{instruction}: 
+座椅通风/加热:
+SeatID: 0x01(主驾),0x02(副驾)
+HeatVentilationLevel: 
+通风: 0x07(三档),0x06(二档),0x05(一档),0x00(关闭)
+加热: 0x04(三档),0x03(二档),0x02(一档),0x01(关闭)
 
-0x07: 三档, 0x06: 二档, 0x05: 一档
-设置主驾座椅通风模式三档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x07#
+温度/风速:
+AreaID: 0x01(主驾),0x02(副驾)
+Temp: 16-32度
+FanSpeed: 0x00(关),0x01-0x07(一到七档)
 
-关闭主驾座椅通风
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
+自动通风加热:
+AreaID: 0x01(主驾),0x02(副驾)
+SWStatus: 0x01(开),0x00(关)
+
+出风模式:
+主驾:setClimLeftVentDirection,副驾:setClimRightVentDirection
+FlowDistrMode: 0x04(除霜),0x03(吹脸脚),0x02(吹脸),0x01(吹脚)
+
+同步模式控制/打开关闭控制/制热模式控制/自动调温模式控制:
+SWStatus: 0x01(开),0x00(关)
+CycleState: 0x01(内循环),0x02(外循环)
+
+示例:
+主驾通风三档:#setSeatHeatVentilationAdj,SeatID,0x01,HeatVentilationLevel,0x07#
+主驾温度21度:#setACTempControl,AreaID,0x01,Temp,21#
+主驾自动通风:#setSeatAutoMode,SeatID,0x01,SWStatus,0x01#
+主驾吹头:#setClimLeftVentDirection,FlowDistrMode,0x04#
+开同步模式:#setClimatSyncMode,SWStatus,0x01#
+开空调:#setACModeControl,SWStatus,0x01#
+内循环:#setInCirculationMode,CycleState,0x01#
+开制热模式:#setClimEVHeaterMode,SWStatus,0x01#
+开自动调温:#setClimAutoNormalMode,SWStatus,0x01#
 """
-
-
-frVentilation = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-0x07: 三档, 0x06: 二档, 0x05: 一档
-设置副驾座椅通风模式三档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
-
-关闭副驾座椅通风
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x00#
-"""
-
-flSeatHeat = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-0x04: 三档, 0x03: 二档, 0x02:一档
-设置主驾座椅加热模式三档
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x04#
-
-关闭主驾座椅加热
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01#
-"""
-
-
-closeflSeatHeat = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-关闭主驾座椅加热
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x01#
-"""
-
-
-frSeatHeat = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-0x04: 三档, 0x03: 二档, 0x02: 一档
-设置副驾座椅加热模式三档
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x04#
-
-关闭副驾座椅加热
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
-"""
-
-closefrSeatHeat = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-关闭副驾座椅加热
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
-"""
-
-flACTempControl = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-设置设置主驾空调温度21度
-#setACTempControl, AreaID, 0x01, Temp, 21#
-
-设置设置主驾空调温度22度
-#setACTempControl, AreaID, 0x01, Temp, 22#
-
-设置设置主驾空调温度32度
-#setACTempControl, AreaID, 0x01, Temp, 32#
-"""
-
-frACTempControl = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-设置设置副驾空调温度21度
-#setACTempControl, AreaID, 0x02, Temp, 21#
-
-设置设置副驾空调温度22度
-#setACTempControl, AreaID, 0x02, Temp, 22#
-
-设置设置副驾空调温度32度
-#setACTempControl, AreaID, 0x02, Temp, 32#
-"""
-
-
-climate_fanspeed = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-一档: 0x01, 二档: 0x02, 三档: 0x03, 四档: 0x04, 五档: 0x05, 六档: 0x06, 七档: 0x07
-设置空调风速一档
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x01#
-
-关闭空调风扇
-#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x00#
-"""
-
-flSeatautomode = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开主驾座椅自动通风加热
-#setSeatAutoMode, SeatID, 0x01, SWStatus, 0x01#
-
-关闭主驾座椅自动通风加热
-#setSeatAutoMode, SeatID, 0x01, SWStatus, 0x00#
-"""
-
-frSeatautomode = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开副驾座椅自动通风加热
-#setSeatAutoMode, SeatID, 0x02, SWStatus, 0x01#
-
-关闭副驾座椅自动通风加热
-#setSeatAutoMode, SeatID, 0x02, SWStatus, 0x00#
-"""
-
-climatsyncmode_prompts = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-接受返回格式：
-a,b,c
-拒绝返回格式
-[a,b,c]
-
-举例：
-用户指令{instruction}: 
-
-启动同步模式
-#setClimatSyncMode, SWStatus, 0x01#
-
-关闭同步模式
-#setClimatSyncMode, SWStatus, 0x00#
-""" 
-
-
-acmodectrl_prompts = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开空调
-#setACModeControl, SWStatus, 0x01#
-
-关闭空调
-#setACModeControl, SWStatus, 0x00#
-""" 
-
-climleftventdirection_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-设置主驾出风口方向为吹头
-#setClimLeftVentDirection, FlowDistrMode, 0x04#
-
-设置主驾出风口方向为吹脸吹脚
-#setClimLeftVentDirection, FlowDistrMode, 0x03#
-
-设置主驾出风口方向为吹脸
-#setClimLeftVentDirection, FlowDistrMode, 0x02#
-
-设置主驾出风口方向为吹脚
-#setClimLeftVentDirection, FlowDistrMode, 0x01#
-""" 
-
-climrightventdirection_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-设置主驾出风口方向为吹头
-#setClimRightVentDirection, FlowDistrMode, 0x04#
-
-设置主驾出风口方向为吹脸吹脚
-#setClimRightVentDirection, FlowDistrMode, 0x03#
-
-设置主驾出风口方向为吹脸
-#setClimRightVentDirection, FlowDistrMode, 0x02#
-
-设置主驾出风口方向为吹脚 | 设置主驾出风口方向为吹角
-#setClimRightVentDirection, FlowDistrMode, 0x01#
-""" 
-
-climcirculationmode_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-设置空气循环模式为内循环
-#setInCirculationMode, CycleState, 0x01#
-
-设置空气循环模式为外循环
-#setInCirculationMode, CycleState, 0x02#
-""" 
-
-climEVheatermode_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开空调制热模式
-#setClimEVHeaterMode, SWStatus, 0x01#
-
-关闭空调制热模式
-#setClimEVHeaterMode, SWStatus, 0x00#
-""" 
-
-climAutoNormalMode_prompt = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开自动调温模式
-#setClimAutoNormalMode, SWStatus, 0x01#
-
-关闭自动调温模式
-#setClimAutoNormalMode, SWStatus, 0x00#
-""" 
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
