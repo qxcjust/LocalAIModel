@@ -37,8 +37,7 @@ def get_closest_match(label, scenario_config_all):
     
 def generate_single_scenario(instruction, prompts):
     prompt = PromptTemplate(
-        template=prompts,
-        input_variables=["query"]
+        template=prompts
     )
     #logging.info(f"generate_single_scenario: {instruction} prompts:{prompts}")
     logging.info(f"generate_single_scenario: {instruction}")
@@ -49,8 +48,7 @@ def generate_single_scenario(instruction, prompts):
 
 def Albert_scenario_select(instruction):
     prompt = PromptTemplate(
-        template=select_scene_prompt,
-        input_variables=["query"]
+        template=select_scene_prompt
     )
     logging.info(f"Albert_scenario_select: {instruction}")
     chain = prompt | llm | StrOutputParser()
@@ -72,6 +70,8 @@ async def process_instruction(input: InstructionInput):
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
     #scenario = scenario_config_all[label]
+    if label == "温度控制场景":
+        label = "空调控制场景"
     logging.info(f"get_closest_match before : {label}")
     scenario = get_closest_match(label, scenario_config_all)
     logging.info(f"场景决策 get_closest_match after: {label}")
@@ -156,4 +156,5 @@ if __name__ == "__main__":
                         format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
     import uvicorn
     uvicorn.run(app, host="localhost", port=8088)
+    # uvicorn.run(app, host="localhost", port=9099)
 

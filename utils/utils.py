@@ -4,10 +4,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from VehicleStatus.checkstatus import Status
 
-def string2list(string_list):
-    temp = string_list.split(', ')
-    return temp
+def convert_hex_to_decimal(hex_string):
+    # 检查字符串是否以 '0x' 开头
+    if hex_string.startswith('0x'):
+        try:
+            return str(int(hex_string, 16))
+        except ValueError:
+            return hex_string
+    else:
+        return hex_string
 
+def string2list(string_list):
+    try:
+        temp = string_list.split(', ')
+    except:
+        temp = string_list.split(',')
+    return temp
 
 def string2string(string_list):
     temp = string_list.split('返回：')
@@ -188,9 +200,9 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             statusvalue = Status[label]['heat_ventilation_state']
         elif name == 'setACTempControl': # '温度控制',
             statusvalue = Status[label]['ac_temp_state']
-        elif name == 'setSeatAutoMode': # '座椅自动模式',
+        elif name == 'setSeatAutoMode': # '座位自动通风加热',
             statusvalue = Status[label]['seat_automode_state']
-        elif name == 'setClimFanSpeed': # '座椅通风',
+        elif name == 'setClimFanSpeed': # '座舱通风',
             statusvalue = Status[label]['fan_speed_state']
         elif name == 'setClimLeftVentDirection': # '左侧出风口方向',
             statusvalue = Status[label]['left_ventdirection_state']
@@ -209,13 +221,29 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
         else:
             statusvalue = 0xff
 
-        if statusvalue == json_params_config['args'][0]['value']:
-            value = json_params_config.get("args")[0]["value"]
-            response_sentence = scenario['responseOpen'].format(scenario[name],scenario[value])
+        if statusvalue == json_params_config['args'][-1]['value']:
+            response_sentence = scenario['responseOpen'].format(scenario['methods'][name])
             return response_sentence, True
         else:
-            value = json_params_config.get("args")[0]["value"]
-            response_sentence = scenario.get("response")[0].format(scenario[name],scenario[value])
+            response_sentence = ""
+            if len(json_params_list) == 3:
+                statustype = json_params_config.get("args")[0]["type"]
+                value = json_params_config.get("args")[0]["value"]
+                response_sentence = scenario.get("response")[name].format(scenario[statustype][value])
+            else: # setClimFanSpeed,setSeatAutoMode,setACTempControl,setSeatHeatVentilationAdj
+                _status_type_position = json_params_config.get("args")[0]["type"]
+                _position_id = json_params_config.get("args")[0]["value"]
+                _status_type = json_params_config.get("args")[1]["type"]
+                _value = json_params_config.get("args")[1]["value"]
+                if name == "setACTempControl":
+                    _result_value = convert_hex_to_decimal(_value)
+                    # _temp = int(_value, 16)
+                    response_sentence = scenario.get("response")[name].format(scenario[_status_type_position][_position_id], 
+                                                                            _result_value)
+                else:    
+                    response_sentence = scenario.get("response")[name].format(scenario[_status_type_position][_position_id], 
+                                                                            scenario[_status_type][_value])
+
             return response_sentence, False                         
     else: # 导航场景，
         value = ''
@@ -230,10 +258,17 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
 def extract_identifier_content(text):
     # 正则表达式匹配两个井号之间的内容
     pattern = re.compile(r"#\s*(.*?)\s*#")
-    match = pattern.search(text)
-    if match:
-        return match.group(1)
-    else:
-        return None
+    #############
+    # 修改
+    matches = pattern.findall(text)[0]
+    return matches if matches else None
+    #############
+
+    # match = pattern.search(text)
+    # if match:
+    #     return match.group(1)
+    # else:
+    #     return None
+    
 
 

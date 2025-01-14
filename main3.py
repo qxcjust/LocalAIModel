@@ -32,9 +32,10 @@ def get_closest_match(label, scenario_config_all):
 def generate_single_scenario(instruction, prompts):
     prompt = PromptTemplate(
         template=prompts,
-        input_variables=["query"]
+        # input_variables=["query"]
     )
     chain = prompt | llm_generate | StrOutputParser()
+    print(f"Instruction from User: {instruction}")
     scenario = chain.invoke({"instruction": instruction})
     print (scenario)
     return scenario
@@ -42,14 +43,18 @@ def generate_single_scenario(instruction, prompts):
 def Albert_scenario_select(instruction):
     prompt = PromptTemplate(
         template=select_scene_prompt,
-        input_variables=["query"]
+        # input_variables=["query"]
     )
     chain = prompt | llm | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction})
     return scenario
 
 def main():
-    instruction = "主驾驶车窗关闭"
+    # instruction = "设置主驾座椅通风模式二档"
+    instruction = "设置主驾出风口方向为除霜"
+    # instruction = "打开主驾驶窗户"
+    # instruction = "打开空调"
+    
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
@@ -60,6 +65,8 @@ def main():
 
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
+    if label == "温度控制场景":
+        label = "空调控制场景"
     scenario = get_closest_match(label,scenario_config_all)
     # scenario = get_closest_match(label, scenario_config_all)
     logging.info(f"场景决策: {label}")
@@ -69,7 +76,6 @@ def main():
 
     # 返回值
     action_list = []
-
     if label != '模糊场景':
         # 场景生成
         json_params_list = string2list(extract_identifier_content(generate_single_scenario(instruction, scenario.get("prompts"))))

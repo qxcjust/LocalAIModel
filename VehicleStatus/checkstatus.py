@@ -36,16 +36,34 @@ Status = {
         'positionlamp_state': '0x01'
     },    
     '空调控制场景':{
-        'heat_ventilation_state': '0x01',
+        # 测试用
+        'heat_ventilation_state': '0xff',
         'ac_temp_state': '0x1a',
-        'seat_automode_state': '0x01',
-        'fan_speed_state': '0x01',
-        'left_ventdirection_state': '0x01',
-        'right_ventdirection_state': '0x01',
-        'sync_mode_state':'0x01',
-        'ac_mode_state':'0x01',
-        'incirculation_mode_state':'0x01',
-        'ev_heater_mode_state':'0x01',
-        'autonormal_mode_state':'0x01',
+        'seat_automode_state': '0xff',
+        'fan_speed_state': '0xff',
+        'left_ventdirection_state': '0xff',
+        'right_ventdirection_state': '0xff',
+        'sync_mode_state':'0xff',
+        'ac_mode_state':'0xff',
+        'incirculation_mode_state':'0xff',
+        'ev_heater_mode_state':'0xff',
+        'autonormal_mode_state':'0xff',
     }
+    # '空调控制场景':{
+    #     # TODO 这里其实应该判断所有已经启动的档位
+    #     # 'heat_ventilation_state': '0x01',
+    #     'heat_ventilation_state': '0xff',
+    #     'ac_temp_state': '0x1a',
+    #     'seat_automode_state': '0x01',
+    #     # TODO 这里其实应该判断所有已经启动的档位
+    #     # 'fan_speed_state': '0x01', 
+    #     'fan_speed_state': '0xff',
+    #     'left_ventdirection_state': '0x01',
+    #     'right_ventdirection_state': '0x01',
+    #     'sync_mode_state':'0x01',
+    #     'ac_mode_state':'0x01',
+    #     'incirculation_mode_state':'0x01',
+    #     'ev_heater_mode_state':'0x01',
+    #     'autonormal_mode_state':'0x01',
+    # }
 }

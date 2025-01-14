@@ -40,29 +40,62 @@ from prompts.prompts import *
 
 climate_obj = {
     "prompts": climate_prompt,
-    "response": [
-        "好的，已为您将温度调整到{}度",
-        "好的，已为您{}空调",
-        "好的，已为您将风速调整到{}档", 
-        "好的，已为您将空调设置为{}模式",
-        "好的，已为您将{}座椅{}",
-        "好的，已为您将{}出风口调整为{}",
-        "好的，已为您将空气循环模式调整为{}"
-    ],
+    "response": {
+        "setSeatHeatVentilationAdj": "好的，已为您将{}座椅调节至{}", ## 通风，加热挡位
+        "setACTempControl": "好的，已为您将{}温度调整到{}度", ## 温度
+        "setSeatAutoMode": "好的，已为您将{}座椅自动模式{}", ## 主驾 打开 ##########调整座椅要加热还是通风
+        "setClimFanSpeed": "好的，已为您将{}座椅通风调节至{}", ## 主驾 通风档位
+        "setClimLeftVentDirection": "好的，已为您将主驾{}功能开启", ## 除霜 打开
+        "setClimRightVentDirection": "好的，已为您将副驾{}功能开启", ## 除霜 打开
+        "setClimatSyncMode": "好的，已为您将同步模式{}", ## 打开
+        "setACModeControl": "好的，已为您将空调{}", ## 打开
+        "setInCirculationMode": "好的，已为您将空气{}{}", ## 内循环 打开
+        "setClimEVHeaterMode": "好的，已为您将制热模式{}", ## 打开
+        "setClimAutoNormalMode": "好的，已为您将自动调温{}" ## 打开
+    },
+    # "response": [
+    #     "好的，已为您将温度调整到{}度",
+    #     "好的，已为您{}空调",
+    #     "好的，已为您将风速调整到{}档", 
+    #     "好的，已为您将空调设置为{}模式",
+    #     "好的，已为您将{}座椅{}",
+    #     "好的，已为您将{}出风口调整为{}",
+    #     "好的，已为您将空气循环模式调整为{}"
+    # ],
+    "responseOpen": '{}已经为您打开',
     "methods": {
         "setSeatHeatVentilationAdj": "座椅通风加热调节",
         "setACTempControl": "温度控制",
-        "setSeatAutoMode": "座椅自动模式",
-        "setClimFanSpeed": "座椅通风",
+        "setSeatAutoMode": "座位自动通风加热",
+        "setClimFanSpeed": "座舱通风",
         "setClimLeftVentDirection": "左侧出风口方向",
         "setClimRightVentDirection": "右侧出风口方向", 
         "setClimatSyncMode": "同步模式",
-        "setACModeControl": "空调开关",
-        "setInCirculationMode": "内外循环",
+        "setACModeControl": "空调",
+        "setInCirculationMode": "内或外循环",
         "setClimEVHeaterMode": "制热模式",
         "setClimAutoNormalMode": "自动调温"
     },
+    # "methods": {
+    #     "setSeatHeatVentilationAdj": "座椅通风加热调节",
+    #     "setACTempControl": "温度控制",
+
+    #     "setSeatAutoMode": "座椅自动模式",
+    #     "setClimFanSpeed": "座椅通风",
+
+    #     "setClimLeftVentDirection": "左侧出风口方向",
+    #     "setClimRightVentDirection": "右侧出风口方向", 
+    #     "setClimatSyncMode": "同步模式",
+    #     "setACModeControl": "空调开关",
+    #     "setInCirculationMode": "内外循环",
+    #     "setClimEVHeaterMode": "制热模式",
+    #     "setClimAutoNormalMode": "自动调温"
+    # },
     "SeatID": {
+        "0x01": "主驾",
+        "0x02": "副驾"
+    },
+    "AreaID": {
         "0x01": "主驾",
         "0x02": "副驾"
     },

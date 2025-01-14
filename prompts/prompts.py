@@ -264,42 +264,127 @@ externalLight_prompt = """
 """
 
 climate_prompt = """
-提取{instruction}空调控制参数,不要任何额外内容。
+请先识别用户指令"INSTRUCTION"中的信息，然后结合"功能描述"返回准确参数。
+不要任何额外内容。
 
-座椅通风/加热:
-SeatID: 0x01(主驾),0x02(副驾)
-HeatVentilationLevel: 
-通风: 0x07(三档),0x06(二档),0x05(一档),0x00(关闭)
-加热: 0x04(三档),0x03(二档),0x02(一档),0x01(关闭)
+功能描述：
+1. 座椅通风/加热功能(setSeatHeatVentilationAdj)：
+SeatID: 主驾,0x01; 副驾,0x02
+HeatVentilationLevel: 通风三档,0x07; 通风二档,0x06; 通风一档,0x05; 加热三档,0x04; 加热二档,0x03; 加热一档,0x02; 关闭加热,0x01; 关闭通风,0x00
 
-温度/风速:
-AreaID: 0x01(主驾),0x02(副驾)
-Temp: 16-32度
-FanSpeed: 0x00(关),0x01-0x07(一到七档)
+2. 温度控制功能(setACTempControl)：
+AreaID: 主驾,0x01; 副驾,0x02
+Temp: temperature,18~32
 
-自动通风加热:
-AreaID: 0x01(主驾),0x02(副驾)
-SWStatus: 0x01(开),0x00(关)
+3. 座位自动通风/加热功能(setSeatAutoMode)：
+SeatID: 主驾,0x01; 副驾,0x02
+SWStatus: 开,0x01; 关,0x00
 
-出风模式:
-主驾:setClimLeftVentDirection,副驾:setClimRightVentDirection
-FlowDistrMode: 0x04(除霜),0x03(吹脸脚),0x02(吹脸),0x01(吹脚)
+4. 座舱通风功能(setClimFanSpeed)：
+AreaID: 主驾,0x01; 副驾,0x02
+FanSpeed: 关,0x00; 一到七档,0x01~0x07
 
-同步模式控制/打开关闭控制/制热模式控制/自动调温模式控制:
-SWStatus: 0x01(开),0x00(关)
-CycleState: 0x01(内循环),0x02(外循环)
+5. 座舱定向除霜/通风功能：
+主驾,setClimLeftVentDirection; 副驾, setClimRightVentDirection
+FlowDistrMode: 除霜,0x04; 吹脸脚,0x03; 吹脸,0x02; 吹脚,0x01
 
-示例:
-主驾通风三档:#setSeatHeatVentilationAdj,SeatID,0x01,HeatVentilationLevel,0x07#
-主驾温度21度:#setACTempControl,AreaID,0x01,Temp,21#
-主驾自动通风:#setSeatAutoMode,SeatID,0x01,SWStatus,0x01#
-主驾吹头:#setClimLeftVentDirection,FlowDistrMode,0x04#
-开同步模式:#setClimatSyncMode,SWStatus,0x01#
-开空调:#setACModeControl,SWStatus,0x01#
-内循环:#setInCirculationMode,CycleState,0x01#
-开制热模式:#setClimEVHeaterMode,SWStatus,0x01#
-开自动调温:#setClimAutoNormalMode,SWStatus,0x01#
+6. 同步模式,setClimatSyncMode; 空调开关,setACModeControl; 内外循环,setInCirculationMode; 制热模式,setClimEVHeaterMode; 自动调温,setClimAutoNormalMode：
+CycleState: 内循环,0x01; 外循环,0x02
+SWStatus: 开,0x01; 关,0x00
+
+例子：
+1. 副驾座位通风模式三档:
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
+
+2. 关闭主驾座椅通风模式:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
+
+3. 副驾座椅加热模式一档:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
+
+4. 关闭副驾座椅加热模式:
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
+
+5. 设置主驾空调温度22度:
+#setACTempControl, AreaID, 0x01, Temp, 22#
+
+6. 主驾座舱通风模式三档:
+#setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
+
+7. 打开制热模式:
+#setClimEVHeaterMode, SWStatus, 0x01#
+
+8. 开启空气循环模式为内循环:
+#setInCirculationMode, CycleState, 0x01, SWStatus, 0x01#
+
+9. 设置副驾出风口方向为除霜:
+#setClimRightVentDirection, FlowDistrMode, 0x04#
+
+INSTRUCTION：
+{instruction}
 """
+
+
+# climate_prompt = """
+# 请先识别用户指令"INSTRUCTION"中的信息，然后结合"功能描述"返回准确参数。
+# 不要任何额外内容。
+
+# 功能描述：
+# 1. 座椅通风/加热功能(setSeatHeatVentilationAdj)：
+# SeatID: 主驾,0x01; 副驾,0x02
+# HeatVentilationLevel: 通风三档,0x07; 通风二档,0x06; 通风一档,0x05; 加热三档,0x04; 加热二档,0x03; 加热一档,0x02; 关闭加热,0x01; 关闭通风,0x00
+
+# 2. 温度控制功能(setACTempControl)：
+# AreaID: 主驾,0x01; 副驾,0x02
+# Temp: temperature,18~32
+
+# 3. 座位自动通风/加热功能(setSeatAutoMode)：
+# SeatID: 主驾,0x01; 副驾,0x02
+# SWStatus: 开,0x01; 关,0x00
+
+# 4. 座舱通风功能(setClimFanSpeed)：
+# AreaID: 主驾,0x01; 副驾,0x02
+# FanSpeed: 关,0x00; 一到七档,0x01~0x07
+
+# 5. 座舱定向除霜/通风功能：
+# 主驾,setClimLeftVentDirection; 副驾, setClimRightVentDirection
+# FlowDistrMode: 除霜,0x04; 吹脸脚,0x03; 吹脸,0x02; 吹脚,0x01
+
+# 6. 同步模式,setClimatSyncMode; 空调开关,setACModeControl; 内外循环,setInCirculationMode; 制热模式,setClimEVHeaterMode; 自动调温,setClimAutoNormalMode：
+# CycleState: 内循环,0x01; 外循环,0x02
+# SWStatus: 开,0x01; 关,0x00
+
+# 例子：
+# 1. 副驾座位通风模式一档:
+# #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05#
+
+# 2. 关闭主驾座椅通风模式:
+# #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
+
+# 3. 主驾座椅加热模式一档:
+# #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
+
+# 4. 关闭副驾座椅加热模式:
+# #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
+
+# 5. 设置主驾空调温度22度:
+# #setACTempControl, AreaID, 0x01, Temp, 22#
+
+# 6. 主驾座舱通风模式三档:
+# #setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
+
+# 7. 打开空调制热模式:
+# #setClimEVHeaterMode, SWStatus, 0x01#
+
+# 8. 开启空气循环模式为内循环:
+# #setInCirculationMode, CycleState, 0x01, SWStatus, 0x01#
+
+# 9. 设置副驾出风口方向为除霜:
+# #setClimRightVentDirection, FlowDistrMode, 0x04#
+
+# INSTRUCTION：
+# {instruction}
+# """
 
 fuzzy_instruction_prompt = """
 请你将用户的模糊指令{instruction}给予下面场景中最合适的的场景反馈
