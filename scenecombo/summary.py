@@ -3,7 +3,6 @@ from scenecombo.LFDoor import *
 from scenecombo.mirror import *
 from scenecombo.chair import *
 from scenecombo.DimmingGlass import *
-from scenecombo.massage import *
 from scenecombo.ventilation import *
 from scenecombo.SeatHeat import *
 from scenecombo.ACTempControl import *

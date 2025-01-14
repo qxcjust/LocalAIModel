@@ -263,35 +263,6 @@ externalLight_prompt = """
 #setLowBeamStatus, lampStatus, 0x01#
 """
 
-flmassage = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开主驾座椅按摩
-#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x01#
-
-关闭主驾座椅按摩
-#setSeatMassageMode, SeatID, 0x01, MassageMode, 0x00#
-"""
-
-
-frmassage = """
-请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
-不要任何额外内容
-
-举例：
-用户指令{instruction}: 
-
-打开副驾座椅按摩
-#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x01#
-
-关闭副驾座椅按摩
-#setSeatMassageMode, SeatID, 0x02, MassageMode, 0x00#
-"""
-
 flVentilation = """
 请你将用户指令{instruction}提取关键信息, 并且返回关键参数。
 不要任何额外内容
