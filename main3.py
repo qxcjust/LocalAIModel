@@ -49,7 +49,7 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
-    instruction = "主驾按摩关闭"
+    instruction = "主驾驶车窗关闭"
     logging.info(f"Human: {instruction}")
     start = time.time()
     # 意图识别
@@ -88,6 +88,7 @@ def main():
 
         response_sentence, checkStatus = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
         print(response_sentence)
+        # 如果返回的是True，说明是重复的指令，不需要再次执行
         if checkStatus == True:
             pass
         else:
@@ -95,6 +96,11 @@ def main():
 
         logging.info(f"Assistant: {response_sentence}")
         end1 = time.time()
+        print({
+            "scenario_decision": label,
+            "json_config": action_list,
+            "response": response_sentence
+        })
         return {
             "scenario_decision": label,
             "json_config": action_list,
