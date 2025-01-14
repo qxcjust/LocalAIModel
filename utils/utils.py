@@ -184,8 +184,6 @@ def generate_response_sentence(label, json_params_config, scenario, json_params_
             response_sentence = scenario.get("response")[0].format(scenario[name],scenario[value])
             return response_sentence, False         
     elif label == '空调控制场景':
-        ###########################################
-        # SONGQI 先加了pass 便于debug 不然报错
         if name == 'setSeatHeatVentilationAdj': # '座椅通风加热调节',
             statusvalue = Status[label]['heat_ventilation_state']
         elif name == 'setACTempControl': # '温度控制',
