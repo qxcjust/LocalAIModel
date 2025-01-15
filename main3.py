@@ -12,6 +12,8 @@ from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
 from prompts.scenepromptselect import select_scene_prompt
 
+from predict import load_model, generate_tts, predict, execute_functions
+
 # from transformers import DistilBertForSequenceClassification, DistilBertTokenizerFast, BertForSequenceClassification, BertTokenizerFast, BertTokenizer, BertModel, pipeline
 # import torch
 import time
@@ -51,7 +53,7 @@ def Albert_scenario_select(instruction):
 
 def main():
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "设置主驾出风口方向为除霜"
+    instruction = "老婆不高兴"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -116,13 +118,24 @@ def main():
         # 返回值
         action_list = []
 
-        all_scenario = scenario.keys()
-        matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
+        # all_scenario = scenario.keys()
+        # matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
 
-        actions = scenario[matched_scenario]['action'].split(',')
+        # actions = scenario[matched_scenario]['action'].split(',')
+
+        # TODO 并行tts合成和执行
+
+        loaded_model = load_model()
+        actions = predict(loaded_model, instruction)
+
+        action_lists_str = ", ".join(actions)
+        fuzzy_reponse = generate_tts(instruction, action_lists_str)
+
+        print (fuzzy_reponse)
+
 
         # 缓慢播放，等待生成完成
-        response_sentence = scenario[matched_scenario]['response']
+        # response_sentence = scenario[matched_scenario]['response']
 
         print(f"Assistant: {response_sentence}")
         logging.info(f"Assistant: {response_sentence}")

@@ -264,66 +264,77 @@ externalLight_prompt = """
 """
 
 climate_prompt = """
-请先识别用户指令"INSTRUCTION"中的信息，然后结合"功能描述"返回准确参数。
+请先识别用户指令"INSTRUCTION"中的信息，然后结合"功能描述"选择合适参数。
 不要任何额外内容。
 
 功能描述：
 1. 座椅通风/加热功能(setSeatHeatVentilationAdj)：
-SeatID: 主驾,0x01; 副驾,0x02
-HeatVentilationLevel: 通风三档,0x07; 通风二档,0x06; 通风一档,0x05; 加热三档,0x04; 加热二档,0x03; 加热一档,0x02; 关闭加热,0x01; 关闭通风,0x00
+SeatID: {{主驾:0x01, 副驾:0x02}}
+HeatVentilationLevel: {{通风三档:0x07, 通风二档:0x06, 通风一档:0x05, 加热三档:0x04, 加热二档:0x03, 加热一档:0x02, 关闭加热:0x01, 关闭通风:0x00}}
 
 2. 温度控制功能(setACTempControl)：
-AreaID: 主驾,0x01; 副驾,0x02
-Temp: temperature,18~32
+AreaID: {{主驾:0x01, 副驾:0x02}}
+Temp: {{temperature:18~32}}
 
 3. 座位自动通风/加热功能(setSeatAutoMode)：
-SeatID: 主驾,0x01; 副驾,0x02
-SWStatus: 开,0x01; 关,0x00
+SeatID: {{主驾:0x01, 副驾:0x02}}
+SWStatus: {{开:0x01, 关:0x00}}
 
 4. 座舱通风功能(setClimFanSpeed)：
-AreaID: 主驾,0x01; 副驾,0x02
-FanSpeed: 关,0x00; 一到七档,0x01~0x07
+AreaID: {{主驾:0x01, 副驾:0x02}}
+FanSpeed: {{关:0x00, 一档:0x01, 二档:0x02, 三档:0x03, 四档:0x04, 五档:0x05, 六档:0x06, 七档:0x07}}
 
 5. 座舱定向除霜/通风功能：
-主驾,setClimLeftVentDirection; 副驾, setClimRightVentDirection
-FlowDistrMode: 除霜,0x04; 吹脸脚,0x03; 吹脸,0x02; 吹脚,0x01
+位置: {{主驾:setClimLeftVentDirection, 副驾:setClimRightVentDirection}}
+FlowDistrMode: {{除霜:0x04, 吹脸脚:0x03, 吹脸:0x02, 吹脚:0x01}}
 
-6. 同步模式,setClimatSyncMode; 空调开关,setACModeControl; 内外循环,setInCirculationMode; 制热模式,setClimEVHeaterMode; 自动调温,setClimAutoNormalMode：
-CycleState: 内循环,0x01; 外循环,0x02
-SWStatus: 开,0x01; 关,0x00
+6. 其他模式：{{同步模式:setClimatSyncMode, 空调开关:setACModeControl, 内外循环:setInCirculationMode, 制热模式:setClimEVHeaterMode, 自动调温:setClimAutoNormalMode}}：
+CycleState: {{内循环:0x01, 外循环:0x02}}
+SWStatus: {{开:0x01, 关:0x00}}
 
 例子：
-1. 副驾座位通风模式三档:
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
-
-2. 关闭主驾座椅通风模式:
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
-
-3. 副驾座椅加热模式一档:
-#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
-
-4. 关闭副驾座椅加热模式:
-#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
-
-5. 设置主驾空调温度22度:
+1. INSTRUCTION: 设置主驾空调温度22度:
 #setACTempControl, AreaID, 0x01, Temp, 22#
 
-6. 主驾座舱通风模式三档:
+2. INSTRUCTION: 主驾座舱通风模式三档:
 #setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
 
-7. 打开制热模式:
+3. INSTRUCTION: 打开制热模式:
 #setClimEVHeaterMode, SWStatus, 0x01#
 
-8. 开启空气循环模式为内循环:
+4. INSTRUCTION: 开启空气循环模式为内循环:
 #setInCirculationMode, CycleState, 0x01, SWStatus, 0x01#
 
-9. 设置副驾出风口方向为除霜:
+5. INSTRUCTION: 设置副驾出风口方向为除霜:
 #setClimRightVentDirection, FlowDistrMode, 0x04#
+
+6. INSTRUCTION: 副驾座位通风模式一档:
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05#
+
+7. INSTRUCTION: 关闭主驾座椅通风模式:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
+
+8. INSTRUCTION: 主驾座位通风模式三档:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x07#
 
 INSTRUCTION：
 {instruction}
 """
 
+"""
+
+6. INSTRUCTION: 副驾座位通风模式三档:
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
+
+7. INSTRUCTION: 关闭主驾座椅通风模式:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
+
+8. INSTRUCTION: 副驾座椅加热模式二档:
+#setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x03#
+
+9. INSTRUCTION: 关闭副驾座椅加热模式:
+#setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x01#
+"""
 
 # climate_prompt = """
 # 请先识别用户指令"INSTRUCTION"中的信息，然后结合"功能描述"返回准确参数。
@@ -355,13 +366,13 @@ INSTRUCTION：
 # SWStatus: 开,0x01; 关,0x00
 
 # 例子：
-# 1. 副驾座位通风模式一档:
-# #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x05#
+# 1. 副驾座位通风模式三档:
+# #setSeatHeatVentilationAdj, SeatID, 0x02, HeatVentilationLevel, 0x07#
 
 # 2. 关闭主驾座椅通风模式:
 # #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x00#
 
-# 3. 主驾座椅加热模式一档:
+# 3. 副驾座椅加热模式一档:
 # #setSeatHeatVentilationAdj, SeatID, 0x01, HeatVentilationLevel, 0x02#
 
 # 4. 关闭副驾座椅加热模式:
@@ -373,7 +384,7 @@ INSTRUCTION：
 # 6. 主驾座舱通风模式三档:
 # #setClimFanSpeed, AreaID, 0x01, FanSpeed, 0x03#
 
-# 7. 打开空调制热模式:
+# 7. 打开制热模式:
 # #setClimEVHeaterMode, SWStatus, 0x01#
 
 # 8. 开启空气循环模式为内循环:

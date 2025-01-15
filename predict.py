@@ -31,7 +31,7 @@ def execute_functions(recommended_functions):
 
 
 def main():
-    instruction = "我想吃西红柿"
+    instruction = "我的女朋友很生气"
     loaded_model = load_model()
 
     start = time.time()
