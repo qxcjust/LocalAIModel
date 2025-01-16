@@ -16,3 +16,9 @@ llm_generate = OllamaLLM(
     model="qwen2.5:3b",
     temperature=0
     )
+
+# TTS
+llm_tts_generate = OllamaLLM(
+    model="qwen2.5:0.5b",
+    temperature=0.4
+)

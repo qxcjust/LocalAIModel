@@ -13,6 +13,8 @@ import logging
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
 from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 
+from predict import load_model, generate_tts, predict
+
 ### base fastapi add interfase
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -58,6 +60,8 @@ def Albert_scenario_select(instruction):
 
 @app.post("/process_instruction")
 async def process_instruction(input: InstructionInput):
+    loaded_model = load_model()
+
     instruction = input.instruction
     logging.info(f"Human: {instruction}")
     start = time.time()
@@ -110,16 +114,27 @@ async def process_instruction(input: InstructionInput):
         # 返回值
         action_list = []
 
-        all_scenario = scenario.keys()
-        matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
+        # all_scenario = scenario.keys()
+        # matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
 
-        actions = scenario[matched_scenario]['action'].split(',')
+        # TODO 并行tts合成和执行
+        start3 = time.time()
+        actions = predict(loaded_model, instruction)
+
+        
+        action_lists_str = ", ".join(actions)
+        fuzzy_reponse = generate_tts(instruction, action_lists_str)
+        end3 = time.time()
+        print(f"模糊回答以及动作生成时间: {end3 - start3} seconds")
+
+        print (f"AI: {fuzzy_reponse}")
+
 
         # 缓慢播放，等待生成完成
-        response_sentence = scenario[matched_scenario]['response']
+        # response_sentence = scenario[matched_scenario]['response']
 
-        print(f"Assistant: {response_sentence}")
-        logging.info(f"Assistant: {response_sentence}")
+        print(f"Assistant: {fuzzy_reponse}")
+        logging.info(f"Assistant: {fuzzy_reponse}")
 
         for action in actions:
             #子场景决策

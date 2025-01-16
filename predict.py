@@ -3,7 +3,7 @@ import time
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from prompts.generate_tts import generate_tts_prompt
-from base import llm_generate
+from base import llm_tts_generate
 
 def load_model():
     with open('model/fuzzy_match_action_list.pkl', 'rb') as f:
@@ -15,7 +15,7 @@ def generate_tts(instruction, action_lists):
         template=generate_tts_prompt,
         input_variables=["instruction", "action_lists"]
     )
-    chain = prompt | llm_generate | StrOutputParser()
+    chain = prompt | llm_tts_generate | StrOutputParser()
     scenario = chain.invoke({"instruction": instruction, "action_lists": action_lists})
     return scenario
 

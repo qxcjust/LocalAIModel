@@ -1,6 +1,6 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from base import llm, llm_generate
+from base import llm, llm_generate,llm_tts_generate
 from prompts.prompts import *
 import time
 from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content
@@ -12,7 +12,7 @@ from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
 from prompts.scenepromptselect import select_scene_prompt
 
-from predict import load_model, generate_tts, predict, execute_functions
+from predict import load_model, generate_tts, predict
 
 # from transformers import DistilBertForSequenceClassification, DistilBertTokenizerFast, BertForSequenceClassification, BertTokenizerFast, BertTokenizer, BertModel, pipeline
 # import torch
@@ -52,8 +52,11 @@ def Albert_scenario_select(instruction):
     return scenario
 
 def main():
+    # Preprocessing
+    loaded_model = load_model()
+
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "老婆不高兴"
+    instruction = "有点暗"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -67,6 +70,7 @@ def main():
 
     #label = nlp(instruction)[0]['label']
     label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
+    print (label)
     if label == "温度控制场景":
         label = "空调控制场景"
     scenario = get_closest_match(label,scenario_config_all)
@@ -75,6 +79,8 @@ def main():
     end1 = time.time()
     logging.info(f"场景决策 Execution time: {end1 - start} seconds")
     print(f"场景决策 Execution time: {end1 - start} seconds")
+
+    
 
     # 返回值
     action_list = []
@@ -124,27 +130,31 @@ def main():
         # actions = scenario[matched_scenario]['action'].split(',')
 
         # TODO 并行tts合成和执行
-
-        loaded_model = load_model()
+        start3 = time.time()
         actions = predict(loaded_model, instruction)
 
+        
         action_lists_str = ", ".join(actions)
         fuzzy_reponse = generate_tts(instruction, action_lists_str)
+        end3 = time.time()
+        print(f"模糊回答以及动作生成时间: {end3 - start3} seconds")
 
-        print (fuzzy_reponse)
+        print (f"AI: {fuzzy_reponse}")
 
 
         # 缓慢播放，等待生成完成
         # response_sentence = scenario[matched_scenario]['response']
 
-        print(f"Assistant: {response_sentence}")
-        logging.info(f"Assistant: {response_sentence}")
+        print(f"Assistant: {fuzzy_reponse}")
+        logging.info(f"Assistant: {fuzzy_reponse}")
 
         for action in actions:
             #子场景决策
 
             print (f"子指令： {action}")
             sub_label = string2string(Albert_scenario_select(action)).replace(' ', '')
+            if sub_label == "温度控制场景":
+                sub_label = "空调控制场景"
             sub_scenario = scenario_config_all[sub_label]
             print(f"子场景决策: {sub_label}")
             logging.info(f"子场景决策: {sub_label}")
@@ -166,7 +176,7 @@ def main():
         return {
             "scenario_decision": label,
             "json_config": action_list,
-            "response": response_sentence
+            "response": fuzzy_reponse
         }
 
 if __name__ == "__main__":
