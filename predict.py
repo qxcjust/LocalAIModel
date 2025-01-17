@@ -31,9 +31,12 @@ def execute_functions(recommended_functions):
 
 
 def main():
-    instruction = "我的女朋友很生气"
-    loaded_model = load_model()
+    instruction = "有人抢我功劳"
 
+    # 矫正权重
+    loaded_model = load_model()
+    test_functions = predict(loaded_model, "天气很热啊")
+    
     start = time.time()
     recommended_functions = predict(loaded_model, instruction)
     print (f"Human: {instruction}")

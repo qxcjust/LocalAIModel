@@ -14,6 +14,8 @@ from prompts.scenepromptselect import select_scene_prompt
 
 from predict import load_model, generate_tts, predict
 
+from Cache.action_config import action_configs
+
 # from transformers import DistilBertForSequenceClassification, DistilBertTokenizerFast, BertForSequenceClassification, BertTokenizerFast, BertTokenizer, BertModel, pipeline
 # import torch
 import time
@@ -56,7 +58,7 @@ def main():
     loaded_model = load_model()
 
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "有点暗"
+    instruction = "老婆生气了"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -150,26 +152,33 @@ def main():
 
         for action in actions:
             #子场景决策
+            if action in action_configs:
+                action_list.append(action_configs[action])
+            else:
+                print (f"子指令： {action}")
+                sub_label = string2string(Albert_scenario_select(action)).replace(' ', '')
+                if sub_label == "温度控制场景":
+                    sub_label = "空调控制场景"
+                sub_scenario = scenario_config_all[sub_label]
+                print(f"子场景决策: {sub_label}")
+                logging.info(f"子场景决策: {sub_label}")
 
-            print (f"子指令： {action}")
-            sub_label = string2string(Albert_scenario_select(action)).replace(' ', '')
-            if sub_label == "温度控制场景":
-                sub_label = "空调控制场景"
-            sub_scenario = scenario_config_all[sub_label]
-            print(f"子场景决策: {sub_label}")
-            logging.info(f"子场景决策: {sub_label}")
+                #子场景生成
+                sub_json_params_list = string2list(extract_identifier_content(generate_single_scenario(action, sub_scenario.get("prompts"))))
+                sub_name = sub_json_params_list[0]
 
-            #子场景生成
-            sub_json_params_list = string2list(extract_identifier_content(generate_single_scenario(action, sub_scenario.get("prompts"))))
-            sub_name = sub_json_params_list[0]
+                # TODO qinxiaocheng
+                sub_args = config_args(sub_json_params_list)
+                sub_json_params_config = rz_action_template_lf_window(sub_name, sub_args, sub_label)
+                print("子生成json \n {}".format(sub_json_params_list))
+                logging.info("子生成json \n {}".format(sub_json_params_config))
 
-            # TODO qinxiaocheng
-            sub_args = config_args(sub_json_params_list)
-            sub_json_params_config = rz_action_template_lf_window(sub_name, sub_args, sub_label)
-            print("子生成json \n {}".format(sub_json_params_list))
-            logging.info("子生成json \n {}".format(sub_json_params_config))
+                action_configs[action] = sub_json_params_list
+                with open('Cache/action_config.py', 'w') as f:
+                    f.write(action_configs)
+                f.close()
 
-            action_list.append(sub_json_params_config)
+                action_list.append(sub_json_params_config)
         print (f"生成全部json: \n{action_list}")
         end3 = time.time()
         print(f"Total Execution time: {end3 - start} seconds")
