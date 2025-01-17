@@ -170,6 +170,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, 
                         format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
     import uvicorn
-    uvicorn.run(app, host="localhost", port=8088)
+    uvicorn.run(app, host="0.0.0.0", port=8088)
     # uvicorn.run(app, host="localhost", port=9099)
 
