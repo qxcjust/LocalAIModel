@@ -58,7 +58,7 @@ def main():
     loaded_model = load_model()
 
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "老婆生气了"
+    instruction = "我想上厕所"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -134,16 +134,12 @@ def main():
         # TODO 并行tts合成和执行
         start3 = time.time()
         actions = predict(loaded_model, instruction)
-
+        end3 = time.time()
         
         action_lists_str = ", ".join(actions)
-        fuzzy_reponse = generate_tts(instruction, action_lists_str)
-        end3 = time.time()
-        print(f"模糊回答以及动作生成时间: {end3 - start3} seconds")
-
-        print (f"AI: {fuzzy_reponse}")
-
-
+        fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str))
+        
+        print(f"ML Model: {end3 - start3} seconds")
         # 缓慢播放，等待生成完成
         # response_sentence = scenario[matched_scenario]['response']
 
