@@ -80,7 +80,7 @@ async def syncLLMResult(request: Request):
             await result_event.wait()
             result_event.clear()
             yield {"data": global_result}
-            # await asyncio.sleep(0.1)  # 避免频繁发送
+            await asyncio.sleep(0.1)  # 避免频繁发送
 
     return EventSourceResponse(event_generator())
 
@@ -100,7 +100,7 @@ def send_client_message(response,actions,sequence_id):
     global global_result
     actions_list = []
     for scene_action in actions:
-        actions_list.append(scene_action[1])
+        actions_list.append(scene_action)
     global_result = generate_result(response,actions_list,sequence_id)
     result_event.set()  # 通知 SSE 有新结果
 
@@ -118,7 +118,7 @@ async def process_instruction(input: InstructionInput):
     #nlp = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
 
     #label = nlp(instruction)[0]['label']
-    label = string2string(Albert_scenario_select(instruction)).replace(' ', '')
+    label = "模糊场景" #string2string(Albert_scenario_select(instruction)).replace(' ', '')
     print (label)
     if label == "温度控制场景":
         label = "空调控制场景"
@@ -142,9 +142,8 @@ async def process_instruction(input: InstructionInput):
         print(f"场景生成json: {end2 - end1}")
         json_params_config = rz_action_template_lf_window(name, args, label)
         print("生成json \n {}".format(json_params_config))
-
+        
         print(f"Execution time: {end2 - start} seconds")
-
         response_sentence, checkStatus = generate_response_sentence(label, json_params_config, scenario, json_params_list, name)
         print(response_sentence)
         # 如果返回的是True，说明是重复的指令，不需要再次执行
@@ -190,7 +189,9 @@ async def process_instruction(input: InstructionInput):
 
         print(f"Assistant: {fuzzy_reponse}")
         logging.info(f"Assistant: {fuzzy_reponse}")
-
+        send_client_message(fuzzy_reponse,actions,"0x01")
+        end4 = time.time()
+        print(f"send client message: {end4 - start} seconds")
         for action in actions:
             #子场景决策
             if action in action_configs:
