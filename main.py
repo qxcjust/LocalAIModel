@@ -23,6 +23,7 @@ from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
 import asyncio
 import json
+from Cache.action_config import action_configs
 
 from pydantic import BaseModel
 from Cache.action_config import action_configs
@@ -168,21 +169,27 @@ async def process_instruction(input: InstructionInput):
         # 返回值
         action_list = []
 
+        # all_scenario = scenario.keys()
+        # matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
+
+        # actions = scenario[matched_scenario]['action'].split(',')
+
         # TODO 并行tts合成和执行
         start3 = time.time()
         actions = predict(loaded_model, instruction)
-        print(f"ML Model: {actions}")
         end3 = time.time()
         
         action_lists_str = ", ".join(actions)
+        # print (generate_tts(instruction, action_lists_str))
         fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str))
+        
         
         print(f"ML Model: {end3 - start3} seconds")
         # 缓慢播放，等待生成完成
         # response_sentence = scenario[matched_scenario]['response']
 
         print(f"Assistant: {fuzzy_reponse}")
-        send_client_message(fuzzy_reponse,actions,"0x01")
+        logging.info(f"Assistant: {fuzzy_reponse}")
 
         for action in actions:
             #子场景决策
@@ -195,6 +202,7 @@ async def process_instruction(input: InstructionInput):
                     sub_label = "空调控制场景"
                 sub_scenario = scenario_config_all[sub_label]
                 print(f"子场景决策: {sub_label}")
+                logging.info(f"子场景决策: {sub_label}")
 
                 #子场景生成
                 sub_json_params_list = string2list(extract_identifier_content(generate_single_scenario(action, sub_scenario.get("prompts"))))
@@ -204,14 +212,14 @@ async def process_instruction(input: InstructionInput):
                 sub_args = config_args(sub_json_params_list)
                 sub_json_params_config = rz_action_template_lf_window(sub_name, sub_args, sub_label)
                 print("子生成json \n {}".format(sub_json_params_list))
-                
+                logging.info("子生成json \n {}".format(sub_json_params_config))
+
                 action_configs[action] = sub_json_params_list
-                with open('Cache/action_config.py', 'w') as f:
-                    f.write(action_configs)
-                f.close()
+                # with open('Cache/action_config.py', 'w') as f:
+                #     f.write(action_configs)
+                # f.close()
 
                 action_list.append(sub_json_params_config)
-                
         print (f"生成全部json: \n{action_list}")
         end3 = time.time()
         print(f"Total Execution time: {end3 - start} seconds")

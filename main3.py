@@ -58,7 +58,7 @@ def main():
     loaded_model = load_model()
 
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "我想上厕所"
+    instruction = "我老婆很生气"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -106,6 +106,7 @@ def main():
         print(response_sentence)
         # 如果返回的是True，说明是重复的指令，不需要再次执行
         if checkStatus == True:
+            print ("重复指令，不需要再次执行")
             pass
         else:
             action_list.append(json_params_config)
@@ -137,7 +138,9 @@ def main():
         end3 = time.time()
         
         action_lists_str = ", ".join(actions)
+        # print (generate_tts(instruction, action_lists_str))
         fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str))
+        
         
         print(f"ML Model: {end3 - start3} seconds")
         # 缓慢播放，等待生成完成
@@ -170,9 +173,9 @@ def main():
                 logging.info("子生成json \n {}".format(sub_json_params_config))
 
                 action_configs[action] = sub_json_params_list
-                with open('Cache/action_config.py', 'w') as f:
-                    f.write(action_configs)
-                f.close()
+                # with open('Cache/action_config.py', 'w') as f:
+                #     f.write(action_configs)
+                # f.close()
 
                 action_list.append(sub_json_params_config)
         print (f"生成全部json: \n{action_list}")

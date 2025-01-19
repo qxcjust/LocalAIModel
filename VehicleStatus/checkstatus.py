@@ -4,7 +4,7 @@ Status = {
         'state': '0x01'
     }, 
     '车窗场景': {
-        'state': '0x01'
+        'state': '0x02'
     },
     '座椅场景': {
         'state': '0x01'
