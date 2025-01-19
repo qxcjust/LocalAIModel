@@ -3,16 +3,17 @@ from langchain_core.output_parsers import StrOutputParser
 from base import llm, llm_generate,llm_tts_generate
 from prompts.prompts import *
 import time
-from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content
+from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content, load_module
 from utils.template import rz_action_template_lf_window
 from scenecombo.summary import scenario_config_all
+import os
 
 from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
 from prompts.scenepromptselect import select_scene_prompt
 
-from predict import load_model, generate_tts, predict
+from predict import *
 
 from Cache.action_config import action_configs
 
@@ -58,7 +59,7 @@ def main():
     loaded_model = load_model()
 
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "我老婆很生气"
+    instruction = "有点暗"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     
@@ -127,6 +128,10 @@ def main():
         # 返回值
         action_list = []
 
+        csv_file = "/home/ubuntu/iScenario/LLM_Assist/datasets/RZ_FuzzInstruction.csv"
+        column_name = "用户说话"
+        target_column = "车辆反馈"
+
         # all_scenario = scenario.keys()
         # matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
 
@@ -135,11 +140,14 @@ def main():
         # TODO 并行tts合成和执行
         start3 = time.time()
         actions = predict(loaded_model, instruction)
+        print (actions)
         end3 = time.time()
+
+        recommended_response = find_max_similarity(csv_file, instruction, column_name, target_column)
         
         action_lists_str = ", ".join(actions)
         # print (generate_tts(instruction, action_lists_str))
-        fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str))
+        fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str, recommended_response))
         
         
         print(f"ML Model: {end3 - start3} seconds")
@@ -171,11 +179,6 @@ def main():
                 sub_json_params_config = rz_action_template_lf_window(sub_name, sub_args, sub_label)
                 print("子生成json \n {}".format(sub_json_params_list))
                 logging.info("子生成json \n {}".format(sub_json_params_config))
-
-                action_configs[action] = sub_json_params_list
-                # with open('Cache/action_config.py', 'w') as f:
-                #     f.write(action_configs)
-                # f.close()
 
                 action_list.append(sub_json_params_config)
         print (f"生成全部json: \n{action_list}")

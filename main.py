@@ -16,7 +16,7 @@ from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 from FuzzyInstruction.FuzzyInstruction import fuzzy_scene_generate_actual_scene
 from prompts.scenepromptselect import select_scene_prompt
 
-from predict import load_model, generate_tts, predict
+from predict import *
 
 ### base fastapi add interfase
 from fastapi import FastAPI, Request
@@ -168,6 +168,10 @@ async def process_instruction(input: InstructionInput):
         # 返回值
         action_list = []
 
+        csv_file = "/home/ubuntu/iScenario/LLM_Assist/datasets/RZ_FuzzInstruction.csv"
+        column_name = "用户说话"
+        target_column = "车辆反馈"
+
         # all_scenario = scenario.keys()
         # matched_scenario = match_fuzzy_instruction(instruction, all_scenario)
 
@@ -177,10 +181,12 @@ async def process_instruction(input: InstructionInput):
         start3 = time.time()
         actions = predict(loaded_model, instruction)
         end3 = time.time()
+
+        recommended_response = find_max_similarity(csv_file, instruction, column_name, target_column)
         
         action_lists_str = ", ".join(actions)
         # print (generate_tts(instruction, action_lists_str))
-        fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str))
+        fuzzy_reponse = extract_identifier_content(generate_tts(instruction, action_lists_str, recommended_response))
         
         
         print(f"ML Model: {end3 - start3} seconds")

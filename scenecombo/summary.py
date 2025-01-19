@@ -28,6 +28,7 @@ scenario_config_all = {
     '雨刷场景': frontwipermode,
     '车外灯场景': externalLight,
     '空调控制场景': climate_obj,
-    '模糊场景': FuzzyInstruction
+    '模糊场景': FuzzyInstruction,
+    '5': dimmingglass_obj
 }
 
