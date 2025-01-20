@@ -6,6 +6,8 @@ import time
 from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content
 from utils.template import rz_action_template_lf_window
 from scenecombo.summary import scenario_config_all
+import warnings
+warnings.filterwarnings('ignore')
 
 from transformers import DistilBertForSequenceClassification, DistilBertTokenizerFast, BertForSequenceClassification, BertTokenizerFast, BertTokenizer, BertModel, pipeline
 import torch

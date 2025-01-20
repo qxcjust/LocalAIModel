@@ -1,12 +1,14 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from base import llm, llm_generate,llm_tts_generate
+from base import *
 from prompts.prompts import *
 import time
 from utils.utils import string2list, string2string, config_args, match_fuzzy_instruction, generate_response_sentence, extract_identifier_content, load_module
 from utils.template import rz_action_template_lf_window
 from scenecombo.summary import scenario_config_all
 import os
+import warnings
+warnings.filterwarnings('ignore')
 
 from scenecombo.FuzzyInstructionScene import FuzzyInstruction
 
@@ -39,7 +41,7 @@ def generate_single_scenario(instruction, prompts):
         template=prompts,
         # input_variables=["query"]
     )
-    chain = prompt | llm_generate | StrOutputParser()
+    chain = prompt | llm_generate_tts | StrOutputParser()
     print(f"Instruction from User: {instruction}")
     scenario = chain.invoke({"instruction": instruction})
     print (scenario)
@@ -59,7 +61,7 @@ def main():
     loaded_model = load_model()
 
     # instruction = "设置主驾座椅通风模式二档"
-    instruction = "有点暗"
+    instruction = "吃太多了，有点困了。"
     # instruction = "打开主驾驶窗户"
     # instruction = "打开空调"
     

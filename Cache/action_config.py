@@ -15,4 +15,6 @@ action_configs = {
 "打开主驾座椅按摩": "{'name': 'val://Vehicle/static/LSSeatCtrl/setSeatMassageMode', 'args': [{'name': 'SeatID', 'type': 'SeatID', 'value': '0x01'}, {'name': 'MassageMode', 'type': 'MassageMode', 'value': '0x01'}]}",
 "打开副驾座椅按摩": "{'name': 'val://Vehicle/static/LSSeatCtrl/setSeatMassageMode', 'args': [{'name': 'SeatID', 'type': 'SeatID', 'value': '0x02'}, {'name': 'MassageMode', 'type': 'MassageMode', 'value': '0x01'}]}",
 "打开氛围灯": "{'name': 'val://Vehicle/static/LSAmbientLightCtrl/setAmbientLightColor/setAmbientLightColor', 'args': [{'name': 'Color', 'type': 'Color', 'value': '0x01'}]}",
+"后排调光玻璃调亮": "{'name': 'val://Vehicle/static/LSDimmingGlass/setDimmingGlassStatus/setDimmingGlassStatus', 'args': [{'name': 'GlassID', 'type': 'GlassID', 'value': '0x00'}",
+"前排调光玻璃调亮": "{'name': 'DimmingStatus', 'type': 'DimmingStatus', 'value': '0x1b'}]}, {'name': '', 'args': [{'name': 'GlassID', 'type': 'GlassID', 'value': '0x01'}, {'name': 'DimmingStatus', 'type': 'DimmingStatus', 'value': '0x1b'}]}"
 }
